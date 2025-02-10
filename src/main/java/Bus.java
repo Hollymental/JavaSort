@@ -1,16 +1,16 @@
 public class Bus implements Comparable<Bus>{
-    private final String number; //номер
+    private final int number; //номер
     private final String model; //модель
     private final int mileage; //пробег
 
-    Bus(String number, String model, int mileage){
+    Bus(int number, String model, int mileage){
         this.number = number;
         this.model = model;
         this.mileage = mileage;
     }
 
     public int compareTo(Bus other) {
-        int result = this.number.compareTo(other.number);
+        int result = Integer.compare(this.number, other.number);
         if (result == 0) {
             result = this.model.compareTo(other.model);
             if (result == 0) {
@@ -21,11 +21,11 @@ public class Bus implements Comparable<Bus>{
     }
 
     public static class BusBuilder{
-        private String number; //номер
+        private int number; //номер
         private String model; //модель
         private int mileage; //пробег
 
-        public BusBuilder number(String number){
+        public BusBuilder number(int number){
             this.number = number;
             return this;
         }
