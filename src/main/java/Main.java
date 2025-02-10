@@ -6,6 +6,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
 
+//        FileUpload fileUpload = new FileUpload("try.txt");
+//        fileUpload.dataUpload();
         while (!exit) {
             System.out.println("Добро пожаловать в программу сортировки.");
             System.out.println("Выберите действие:");
@@ -45,6 +47,8 @@ public class Main {
         System.out.println("3. Студент");
 
         int dataType = scanner.nextInt();
+        DataValidation dataValidation = new DataValidation(dataType);
+        boolean isValid = dataValidation.validation();
         // Логика конструктора классов
     }
 
