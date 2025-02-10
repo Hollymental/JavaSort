@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DataValidation {
@@ -8,8 +9,13 @@ public class DataValidation {
     }
 
     public boolean validation() {
+        ArrayList<String> text = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        String text = scanner.nextLine();
+        scanner.useDelimiter(" ");
+        while (scanner.hasNext()) {
+            text.add(scanner.nextLine());
+        }
+
         return switch (this.dataType) {
             case 1 -> busValidation(text);
             case 2 -> userValidation(text);
@@ -18,18 +24,30 @@ public class DataValidation {
         };
     }
 
-    boolean busValidation(String text) {
-
-        return false;
+    boolean busValidation(ArrayList<String> text) {
+        String number = text.get(0);
+        String model = text.get(1);
+        int mileage = 0;
+        try {
+            mileage = Integer.parseInt(text.get(2).trim());
+        } catch (NumberFormatException nfe) {
+            System.out.println("NumberFormatException: " + nfe.getMessage());
+        }
+        return 0 < mileage && mileage < 999999;
     }
 
-    boolean userValidation(String text) {
-
-        return false;
+    boolean userValidation(ArrayList<String> text) {
+        String groupNumber = text.get(0);
+        double averageScore = 0;
+        String recordBookNumber = text.get(2);
+        return recordBookNumber.matches("^[A-Z]+[0-9]{5}$");
     }
 
-    boolean studentValidation(String text) {
+    boolean studentValidation(ArrayList<String> text) {
+//        String name = text.get(0);
+//        String password = text.get(1);
+        String email = text.get(2);
 
-        return false;
+        return email.matches("^[\\w-]+@[\\w-]+(\\.[\\w-]+)*\\.[a-z]{2,}$");
     }
 }
