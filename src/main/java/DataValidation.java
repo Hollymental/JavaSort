@@ -1,13 +1,13 @@
 import java.util.Scanner;
 
 public class DataValidation {
-    int dataType;
+    private final int dataType;
 
     public DataValidation(int dataType) {
         this.dataType = dataType;
     }
 
-    boolean validation() {
+    public boolean validation() {
         Scanner scanner = new Scanner(System.in);
         String text = scanner.nextLine();
         return switch (this.dataType) {
