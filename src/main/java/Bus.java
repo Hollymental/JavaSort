@@ -10,7 +10,7 @@ public class Bus implements Comparable<Bus>{
     }
 
     public int compareTo(Bus other) {
-        int result = Integer.compare(this.number,other.number);
+        int result = Integer.compare(this.number, other.number);
         if (result == 0) {
             result = this.model.compareTo(other.model);
             if (result == 0) {
