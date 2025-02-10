@@ -1,14 +1,22 @@
 package factory;
 
+import model.Bus;
+import model.Student;
+import model.User;
+
 import java.util.Random;
 
 public class ModelFactory {
     private static final Random random = new Random();
-    static Faker dataFaker = new Faker();
+    static String[] names = new String[] {
+        "Александр","Екатерина","Дмитрий","Анна", "Сергей","Мария",
+                "Анастасия","Иван","Ольга","Владимир","Татьяна",
+                "Максим", "Елена", "Николай", "Юлия"
+    };
 
     public static Bus createRandomBus() {
         return new Bus.BusBuilder()
-                .setNumber(dataFaker.bothify("??####", true))
+                .setNumber("A" + random.nextInt(1000, 9999))
                 .setModel("Model-" + random.nextInt(5))
                 .setMileage(random.nextInt(100000))
                 .build();
@@ -18,15 +26,15 @@ public class ModelFactory {
         return new Student.StudentBuilder()
                 .setGroupNumber("Group-" + random.nextInt(5))
                 .setAverageScore(3 + random.nextDouble() * 2)
-                .setRecordBookNumber(dataFaker.bothify("B###", true))
+                .setRecordBookNumber("B"+ random.nextInt(1000, 9999))
                 .build();
     }
 
     public static User createRandomUser() {
         return new User.UserBuilder()
-                .setName(dataFaker.name().firstName())
-                .setPassword(dataFaker.numerify("######"))
-                .setEmail(dataFaker.bothify("###?@gmail.com"))
+                .setName(names[random.nextInt(14)])
+                .setPassword("pass" + random.nextInt(1000, 9999))
+                .setEmail("email" + random.nextInt(10, 99) + "@gmail.com")
                 .build();
     }
 

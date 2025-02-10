@@ -140,7 +140,9 @@ public class SortingApplication {
 
     // quicksort evenoddquicksort
     private static <T extends Comparable<T>> void processArray(T[] array, String type) {
-        System.out.println("Ваш выбор сортировки 1- quicksort, 2-evenoddquicksort: ");
+        //System.out.println("Ваш выбор сортировки 1- quicksort, 2-evenoddquicksort: ");
+        System.out.println("Ваш выбор сортировки 1- quicksort");
+
         int sortChoice = scanner.nextInt();
         String strategyName = (sortChoice == 1) ? "quicksort" : "evenoddquicksort";
 

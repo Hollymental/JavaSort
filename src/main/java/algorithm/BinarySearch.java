@@ -1,6 +1,10 @@
 package algorithm;
 
-public class BinarySearch {
+import model.Bus;
+import model.Student;
+import model.User;
+
+public class BinarySearch<T extends Comparable<T>>{
 
     public int search(T[] arr, String key) {
         return binarySearch(arr, key, 0, arr.length - 1);
@@ -36,7 +40,7 @@ public class BinarySearch {
             return ((Bus) item).getNumber();
         }
         if (item instanceof User) {
-            return ((User) item).getEmail();
+            return ((User) item).getName();
         }
         throw new IllegalArgumentException("Unsupported type for search");
     }
