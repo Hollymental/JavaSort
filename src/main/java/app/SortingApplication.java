@@ -5,7 +5,6 @@ import factory.SortingStrategyFactory;
 import model.Bus;
 import model.Student;
 import model.User;
-import service.SearchService;
 import service.SortingService;
 import strategy.SortingStrategy;
 import util.InputValidator;
@@ -108,14 +107,14 @@ public class SortingApplication {
             System.out.println("Введите данные для элемента " + (i + 1) + ":");
             if (clazz == Bus.class) {
                 array[i] = clazz.cast(ModelFactory.createBus(
-                        getStringInput("Номер: "),
+                        getIntInput("Номер: "),
                         getStringInput("Модель: "),
                         getIntInput("Пробег: ")));
             } else if (clazz == Student.class) {
                 array[i] = clazz.cast(ModelFactory.createStudent(
                         getStringInput("Номер группы: "),
                         getDoubleInput("Средний балл: "),
-                        getStringInput("Номер зачетной книжки: ")));
+                        getIntInput("Номер зачетной книжки: ")));
             } else if (clazz == User.class) {
                 array[i] = clazz.cast(ModelFactory.createUser(
                         getStringInput("Имя пользователя: "),
@@ -140,16 +139,14 @@ public class SortingApplication {
 
     // quicksort evenoddquicksort
     private static <T extends Comparable<T>> void processArray(T[] array, String type) {
-        //System.out.println("Ваш выбор сортировки 1- quicksort, 2-evenoddquicksort: ");
         System.out.println("Ваш выбор сортировки 1- quicksort");
 
         int sortChoice = scanner.nextInt();
-        String strategyName = (sortChoice == 1) ? "quicksort" : "evenoddquicksort";
+        String strategyName = (sortChoice == 1) ? "quicksort" : "";
 
         SortingStrategy<T> strategy = SortingStrategyFactory.createSortingStrategy(strategyName,
                 (Class<T>) array.getClass().getComponentType());
         SortingService<T> sortingService = new SortingService<>(strategy);
-        SearchService<T> searchService = new SearchService<>();
 
         System.out.println("Исходный массив:");
         sortingService.printArray(array);
@@ -159,33 +156,27 @@ public class SortingApplication {
         System.out.println("Отсортированный массив:");
         sortingService.printArray(array);
 
-        System.out.println("Хотите выполнить поиск? (y/n)");
-        if (scanner.next().equalsIgnoreCase("y")) {
-            String key = getSearchKey(type);
-            searchService.printSearchResult(array, key);
-        }
-
         System.out.println("Хотите сохранить результат в файл? (y/n)");
         if (scanner.next().equalsIgnoreCase("y")) {
             saveToFile(array);
         }
     }
 
-    private static <T> void fillArrayRandomly(T[] array) {
-        for (int i = 0; i < array.length; i++) {
-            array[i] = (T) ModelFactory.createRandomBus();
-        }
-    }
-
-    private static <T> void fillArrayManually(T[] array) {
-        for (int i = 0; i < array.length; i++) {
-            System.out.println("Введите данные для элемента " + (i + 1) + ":");
-            array[i] = (T) ModelFactory.createBus(
-                    getStringInput("Номер: "),
-                    getStringInput("Модель: "),
-                    getIntInput("Пробег: "));
-        }
-    }
+//    private static <T> void fillArrayRandomly(T[] array) {
+//        for (int i = 0; i < array.length; i++) {
+//            array[i] = (T) ModelFactory.createRandomBus();
+//        }
+//    }
+//
+//    private static <T> void fillArrayManually(T[] array) {
+//        for (int i = 0; i < array.length; i++) {
+//            System.out.println("Введите данные для элемента " + (i + 1) + ":");
+//            array[i] = (T) ModelFactory.createBus(
+//                    getIntInput("Номер: "),
+//                    getStringInput("Модель: "),
+//                    getIntInput("Пробег: "));
+//        }
+//    }
 
     private static <T> void fillArrayFromFile(T[] array, Class<T> clazz) {
         String fileName = getStringInput("Введите имя файла: ");
@@ -228,11 +219,11 @@ public class SortingApplication {
         return scanner.next();
     }
 
-    private static String getSearchKey(String type) {
+    private static int getSearchKey(String type) {
         return switch (type) {
-            case "Bus" -> getStringInput("Введите номер автобуса для поиска: ");
-            case "User" -> getStringInput("Введите имя пользователя для поиска: ");
-            case "Student" -> getStringInput("Введите номер зачетной книжки для поиска: ");
+            case "Bus" -> getIntInput("Введите номер автобуса для поиска: ");
+            //case "User" -> getStringInput("Введите имя пользователя для поиска: ");
+            case "Student" -> getIntInput("Введите номер зачетной книжки для поиска: ");
             default -> throw new IllegalArgumentException("Неизвестный тип: " + type);
         };
     }

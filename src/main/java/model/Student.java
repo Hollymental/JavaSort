@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Student implements Comparable<Student> {
     private final String groupNumber;
     private final double averageScore;
-    private final String recordBookNumber;
+    private final Integer recordBookNumber;
 
     private Student(StudentBuilder builder) {
         this.groupNumber = builder.groupNumber;
@@ -13,7 +13,7 @@ public class Student implements Comparable<Student> {
         this.recordBookNumber = builder.recordBookNumber;
     }
 
-    public Student(String groupNumber, double averageScore, String recordBookNumber) {
+    public Student(String groupNumber, double averageScore, Integer recordBookNumber) {
         this.groupNumber = groupNumber;
         this.averageScore = averageScore;
         this.recordBookNumber = recordBookNumber;
@@ -27,7 +27,7 @@ public class Student implements Comparable<Student> {
         return averageScore;
     }
 
-    public String getRecordBookNumber() {
+    public Integer getRecordBookNumber() {
         return recordBookNumber;
     }
 
@@ -67,7 +67,7 @@ public class Student implements Comparable<Student> {
     public static class StudentBuilder {
         private String groupNumber;
         private double averageScore;
-        private String recordBookNumber;
+        private Integer recordBookNumber;
 
         public StudentBuilder setGroupNumber(String groupNumber) {
             this.groupNumber = groupNumber;
@@ -79,7 +79,7 @@ public class Student implements Comparable<Student> {
             return this;
         }
 
-        public StudentBuilder setRecordBookNumber(String recordBookNumber) {
+        public StudentBuilder setRecordBookNumber(int recordBookNumber) {
             this.recordBookNumber = recordBookNumber;
             return this;
         }

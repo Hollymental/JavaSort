@@ -3,7 +3,7 @@ package model;
 import java.util.Objects;
 
 public class Bus implements Comparable<Bus> {
-    private final String number;
+    private final int number;
     private final String model;
     private final int mileage;
 
@@ -13,7 +13,7 @@ public class Bus implements Comparable<Bus> {
         this.mileage = builder.mileage;
     }
 
-    public String getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
@@ -27,7 +27,7 @@ public class Bus implements Comparable<Bus> {
 
     @Override
     public int compareTo(Bus other) {
-        int result = this.number.compareTo(other.number);
+        int result = Integer.compare(this.number, other.number);
         if (result == 0) {
             result = this.model.compareTo(other.model);
             if (result == 0) {
@@ -42,7 +42,7 @@ public class Bus implements Comparable<Bus> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bus bus = (Bus) o;
-        return Objects.equals(number, bus.number) &&
+        return  number == bus.number &&
                 Objects.equals(model, bus.model) && mileage == bus.mileage;
     }
 
@@ -57,11 +57,11 @@ public class Bus implements Comparable<Bus> {
     }
 
     public static class BusBuilder {
-        private String number;
+        private int number;
         private String model;
         private int mileage;
 
-        public BusBuilder setNumber(String number) {
+        public BusBuilder setNumber(int number) {
             this.number = number;
             return this;
         }

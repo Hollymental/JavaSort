@@ -16,7 +16,7 @@ public class ModelFactory {
 
     public static Bus createRandomBus() {
         return new Bus.BusBuilder()
-                .setNumber("A" + random.nextInt(1000, 9999))
+                .setNumber(random.nextInt(1000,9999))
                 .setModel("Model-" + random.nextInt(5))
                 .setMileage(random.nextInt(100000))
                 .build();
@@ -26,7 +26,7 @@ public class ModelFactory {
         return new Student.StudentBuilder()
                 .setGroupNumber("Group-" + random.nextInt(5))
                 .setAverageScore(3 + random.nextDouble() * 2)
-                .setRecordBookNumber("B"+ random.nextInt(1000, 9999))
+                .setRecordBookNumber(random.nextInt(1000, 9999))
                 .build();
     }
 
@@ -39,7 +39,7 @@ public class ModelFactory {
     }
 
 
-    public static Bus createBus(String number, String model, int mileage) {
+    public static Bus createBus(int number, String model, int mileage) {
         return new Bus.BusBuilder()
                 .setNumber(number)
                 .setModel(model)
@@ -47,7 +47,7 @@ public class ModelFactory {
                 .build();
     }
 
-    public static Student createStudent(String groupNumber, double averageScore, String recordBookNumber) {
+    public static Student createStudent(String groupNumber, double averageScore, int recordBookNumber) {
         return new Student.StudentBuilder()
                 .setGroupNumber(groupNumber)
                 .setAverageScore(averageScore)
