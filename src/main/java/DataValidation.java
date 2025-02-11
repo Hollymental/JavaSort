@@ -27,7 +27,7 @@ public class DataValidation {
     boolean busValidation(ArrayList<String> text) {
         String number = text.get(0);
         String model = text.get(1);
-        int mileage = Integer.parseInt(text.get(2));
+   int mileage = Integer.parseInt(text.get(2));
 //        } catch (NumberFormatException nfe) {
 //            System.out.println("NumberFormatException: " + nfe.getMessage());
 //        }
