@@ -1,9 +1,13 @@
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.*;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Iterator;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class FileUpload {
     String fileName;
@@ -14,22 +18,38 @@ public class FileUpload {
         this.path = Paths.get("").toAbsolutePath().toString() + "\\files\\";
     }
 
-    void dataUpload() {
-        String file = this.path + this.fileName;
-
-        ArrayList<String> list = new ArrayList<>();
+    User[] usersUpload() {
+        String filePath = this.path + this.fileName;
+        User[] users = new User[5];
         try {
-            Scanner scanner = new Scanner(new FileReader(new File(file)));
-//        scanner.useDelimiter(" ");
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                list.add(line);
+            FileInputStream file = new FileInputStream(new File(filePath));
+            XSSFWorkbook workbook = new XSSFWorkbook(file);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+
+            Iterator<Row> rowIterator = sheet.iterator();
+            int rowCount = 0;
+            while (rowIterator.hasNext()) {
+                Row row = rowIterator.next();
+                Iterator<Cell> cellIterator
+                        = row.cellIterator();
+                String[] userText = new String[3];
+                int cellCount = 0;
+                while (cellIterator.hasNext()) {
+                    Cell cell = cellIterator.next();
+                    userText[cellCount] = cell.getStringCellValue();
+                    cellCount++;
+                }
+//                User user = new User.UserBuilder().name(userText[0]).password(userText[1]).email(userText[2]).build();
+//                users[rowCount] = user;
+//                rowCount++;
             }
-            System.out.print(list);
+
+            file.close();
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-//        return list.toArray(new String[list.size()]);
+        return users;
+//        return new User[];
     }
 
 

@@ -8,14 +8,8 @@ public class DataValidation {
         this.dataType = dataType;
     }
 
-    public boolean validation() {
-        ArrayList<String> text = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
-        scanner.useDelimiter(" ");
-        while (scanner.hasNext()) {
-            text.add(scanner.nextLine());
-        }
-
+    public boolean validation(String[] text) {
+//        String[] text = {"", "", ""};
         return switch (this.dataType) {
             case 1 -> busValidation(text);
             case 2 -> userValidation(text);
@@ -24,29 +18,28 @@ public class DataValidation {
         };
     }
 
-    boolean busValidation(ArrayList<String> text) {
-        String number = text.get(0);
-        String model = text.get(1);
-        int mileage = 0;
-        try {
-            mileage = Integer.parseInt(text.get(2).trim());
-        } catch (NumberFormatException nfe) {
-            System.out.println("NumberFormatException: " + nfe.getMessage());
-        }
+    boolean busValidation(String[] text) {
+        String number = text[0];
+        String model = text[1];
+        int mileage = Integer.parseInt(text[2]);
+//        } catch (NumberFormatException nfe) {
+//            System.out.println("NumberFormatException: " + nfe.getMessage());
+//        }
         return 0 < mileage && mileage < 999999;
     }
 
-    boolean userValidation(ArrayList<String> text) {
-        String groupNumber = text.get(0);
+    boolean studentValidation (String[] text) {
+        String groupNumber = text[0];
         double averageScore = 0;
-        String recordBookNumber = text.get(2);
-        return recordBookNumber.matches("^[A-Z]+[0-9]{5}$");
+//        int recordBookNumber = Integer.parseInt(text.get(2));
+        String recordBookNumber = text[2];
+        return recordBookNumber.matches("[0-9]{5}$");
     }
 
-    boolean studentValidation(ArrayList<String> text) {
-//        String name = text.get(0);
-//        String password = text.get(1);
-        String email = text.get(2);
+    boolean userValidation(String[] text) {
+//        String name = text[0];
+//        String password = text[1];
+        String email = text[2];
 
         return email.matches("^[\\w-]+@[\\w-]+(\\.[\\w-]+)*\\.[a-z]{2,}$");
     }
