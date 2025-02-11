@@ -9,6 +9,12 @@ public class Student implements Comparable<Student>{
         this.recordBookNumber = recordBookNumber;
     }
 
+    public String getGroupNumber() {return groupNumber;} //получить номер группы
+
+    public double getAverageScore() {return averageScore;} //получить средний балл
+
+    public int getRecordBookNumber() {return recordBookNumber;} //получить номер зачётной книжки
+
     public int compareTo(Student other){
         int result = this.groupNumber.compareTo(other.groupNumber);
         if (result == 0) {
@@ -25,17 +31,17 @@ public class Student implements Comparable<Student>{
         private double averageScore; //средний балл
         private int recordBookNumber; //номер зачётной книжки
 
-        public StudentBuilder groupNumber(String groupNumber){
+        public StudentBuilder setGroupNumber(String groupNumber){
             this.groupNumber = groupNumber;
             return this;
         }
 
-        public StudentBuilder averageScore(double averageScore){
+        public StudentBuilder setAverageScore(double averageScore){
             this.averageScore = averageScore;
             return this;
         }
 
-        public StudentBuilder recordBookNumber(int recordBookNumber){
+        public StudentBuilder setRecordBookNumber(int recordBookNumber){
             this.recordBookNumber = recordBookNumber;
             return this;
         }
