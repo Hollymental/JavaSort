@@ -9,7 +9,13 @@ public class User implements Comparable<User>{
         this.email = email;
     }
 
-    public int compareTo(User other){
+    public String getName() {return name;} // получить имя
+
+    public String getPassword() {return password;} //получить пароль
+
+    public String getEmail() {return email;} //получить почту
+
+    public int compareTo(User other){ //сравнение
         int result = this.name.compareTo(other.name);
         if (result == 0) {
             result = this.password.compareTo(other.password);
@@ -25,17 +31,17 @@ public class User implements Comparable<User>{
         private String password; //пароль
         private String email; //почта
 
-        public UserBuilder name(String name){
+        public UserBuilder setName(String name){
             this.name = name;
             return this;
         }
 
-        public UserBuilder password(String password){
+        public UserBuilder setPassword(String password){
             this.password = password;
             return this;
         }
 
-        public UserBuilder email(String email){
+        public UserBuilder setEmail(String email){
             this.email = email;
             return this;
         }
