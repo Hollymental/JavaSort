@@ -65,8 +65,38 @@ public class Main {
         System.out.println("3. Студент");
 
         int dataType = scanner.nextInt();
+        System.out.println("Выберите размер:");
+        int size = scanner.nextInt();
+        Object[] array = new Object[size];
+        switch (dataType) {
 
-        String[] text = {"", "", ""};
+            case 1:
+                Bus[] busArray = ArrayCreator.createArray("Автобусов", size, new BusHandler());
+            for (Bus bus: busArray)
+            {
+                System.out.println(bus.toString());
+            }
+            break;
+            case 2:
+                User[] userArray = ArrayCreator.createArray("Пользователей", size, new UserHandler());
+                for (User user: userArray)
+                {
+                    System.out.println(user.toString());
+                }
+                break;
+            case 3:
+                Student[] studentArray = ArrayCreator.createArray("Студентов", size, new StudentHandler());
+                for (Student student: studentArray)
+                {
+                    System.out.println(student.toString());
+                }
+                break;
+            default:
+                System.out.println("Неверный выбор. Попробуйте снова.");
+        }
+
+                ;
+//        String[] text = {"", "", ""};
 /*
         ---------------
         Валидация введенных данных(text) по выбранному типу данных(dataType)
@@ -75,8 +105,12 @@ public class Main {
         DataValidation dataValidation = new DataValidation(dataType);
         boolean isValid = dataValidation.validation(text);
  */
-        // Логика конструктора классов
+
     }
+
+
+
+
 
     private static void sortData(Scanner scanner) {
         System.out.println("Выберите алгоритм сортировки:");
@@ -89,5 +123,102 @@ public class Main {
     private static void performBinarySearch(Scanner scanner) {
         // Логика выполнения бинарного поиска
         System.out.println("Введите элемент для поиска:");
+    }
+
+
+}
+class BusHandler implements ArrayCreator.ArrayHandler<Bus> {
+    @Override
+    public Bus[] createArray(int size) {
+        return new Bus[size];
+    }
+
+    @Override
+    public void fillArrayRandomly(Bus[] array, int size) {
+        for (int i = 0; i < array.length; i++) {
+            array[i] = (Bus) ModelFactory.createRandomBus();
+        }
+    }
+
+    @Override
+    public void fillArrayManually(Bus[] array, int size) {
+        Scanner scanner = new Scanner(System.in);
+        for (int i = 0; i < array.length; i++) {
+            System.out.println("Введите данные для элемента " + (i + 1) + ":");
+            array[i] = (Bus) ModelFactory.createBus(
+                    scanner.nextLine(),
+                    scanner.nextLine(),
+                    scanner.nextInt());
+        }
+    }
+
+    @Override
+    public void fillArrayFromFile(Bus[] array, int size) {
+
+        Bus[] buses = new FileUpload("buses.xlsx").busesUpload();
+    }
+}
+
+class UserHandler implements ArrayCreator.ArrayHandler<User> {
+    @Override
+    public User[] createArray(int size) {
+        return new User[size];
+    }
+
+    @Override
+    public void fillArrayRandomly(User[] array, int size) {
+        for (int i = 0; i < array.length; i++) {
+            array[i] = (User) ModelFactory.createRandomUser();
+        }
+    }
+
+    @Override
+    public void fillArrayManually(User[] array, int size) {
+        Scanner scanner = new Scanner(System.in);
+        for (int i = 0; i < array.length; i++) {
+            System.out.println("Введите данные для элемента " + (i + 1) + ":");
+            array[i] = (User) ModelFactory.createUser(
+                    scanner.nextLine(),
+                    scanner.nextLine(),
+                    scanner.nextLine());
+        }
+    }
+
+    @Override
+    public void fillArrayFromFile(User[] array, int size) {
+        User[] users = new FileUpload("users.xlsx").usersUpload();
+
+    }
+}
+
+class StudentHandler implements ArrayCreator.ArrayHandler<Student> {
+    @Override
+    public Student[] createArray(int size) {
+        return new Student[size];
+    }
+
+    @Override
+    public void fillArrayRandomly(Student[] array, int size) {
+        for (int i = 0; i < array.length; i++) {
+            array[i] = (Student) ModelFactory.createRandomStudent();
+        }
+    }
+
+    @Override
+    public void fillArrayManually(Student[] array, int size) {
+        Scanner scanner = new Scanner(System.in);
+        for (int i = 0; i < array.length; i++) {
+            System.out.println("Введите данные для элемента " + (i + 1) + ":");
+            array[i] = (Student) ModelFactory.createStudent(
+                    scanner.nextLine(),
+                    scanner.nextInt(),
+                    scanner.nextInt());
+        }
+    }
+
+    @Override
+    public void fillArrayFromFile(Student[] array, int size) {
+
+        Student[] students = new FileUpload("students.xlsx").studentsUpload();
     }
 }
