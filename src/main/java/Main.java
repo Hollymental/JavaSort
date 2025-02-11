@@ -10,7 +10,10 @@ public class Main {
         FileUpload fileUpload = new FileUpload("users.xlsx");
 
 //        User[] users = new FileUpload("users.xlsx").usersUpload();
+//        Bus[] buses = new FileUpload("buses.xlsx").busesUpload();
+//        Student[] students = new FileUpload("students.xlsx").studentsUpload();
 //        fileUpload.dataUpload();
+        System.out.println(users[0].getName());
         while (!exit) {
             System.out.println("Добро пожаловать в программу сортировки.");
             System.out.println("Выберите действие:");
@@ -50,8 +53,10 @@ public class Main {
         System.out.println("3. Студент");
 
         int dataType = scanner.nextInt();
+
+        String[] text = {"", "", ""};
         DataValidation dataValidation = new DataValidation(dataType);
-        boolean isValid = dataValidation.validation();
+        boolean isValid = dataValidation.validation(text);
         // Логика конструктора классов
     }
 
