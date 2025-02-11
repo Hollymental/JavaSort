@@ -7,9 +7,10 @@ public class Main {
         boolean exit = false;
 
 //        FileUpload fileUpload = new FileUpload("try.txt");
+        FileUpload fileUpload = new FileUpload("users.xlsx");
+
+//        User[] users = new FileUpload("users.xlsx").usersUpload();
 //        fileUpload.dataUpload();
-        FileUpload fileUpload = new FileUpload("test.xlsx");
-        fileUpload.dataUpload();
         while (!exit) {
             System.out.println("Добро пожаловать в программу сортировки.");
             System.out.println("Выберите действие:");

@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.*;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -19,49 +18,38 @@ public class FileUpload {
         this.path = Paths.get("").toAbsolutePath().toString() + "\\files\\";
     }
 
-    void dataUpload() {
+    User[] usersUpload() {
         String filePath = this.path + this.fileName;
-        ArrayList<String> list = new ArrayList<>();
+        User[] users = new User[5];
         try {
             FileInputStream file = new FileInputStream(new File(filePath));
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             XSSFSheet sheet = workbook.getSheetAt(0);
 
             Iterator<Row> rowIterator = sheet.iterator();
+            int rowCount = 0;
             while (rowIterator.hasNext()) {
                 Row row = rowIterator.next();
                 Iterator<Cell> cellIterator
                         = row.cellIterator();
+                String[] userText = new String[3];
+                int cellCount = 0;
                 while (cellIterator.hasNext()) {
-
                     Cell cell = cellIterator.next();
-                    switch (cell.getCellType()) {
-
-                        // Case 1
-                        case Cell.CELL_TYPE_NUMERIC:
-                            System.out.print(
-                                    cell.getNumericCellValue()
-                                            + "t");
-                            break;
-
-                        // Case 2
-                        case Cell.CELL_TYPE_STRING:
-                            System.out.print(
-                                    cell.getStringCellValue()
-                                            + "t");
-                            break;
-                    }
+                    userText[cellCount] = cell.getStringCellValue();
+                    cellCount++;
                 }
-
-                System.out.println("");
+//                User user = new User.UserBuilder().name(userText[0]).password(userText[1]).email(userText[2]).build();
+//                users[rowCount] = user;
+//                rowCount++;
             }
 
             file.close();
         } catch (IOException ex) {
-            ex.printStackTrace();
-//            System.out.println(ex.getMessage());
+            System.out.println(ex.getMessage());
         }
-//        return list.toArray(new String[list.size()]);
+        return users;
+//        return new User[];
     }
 
 
