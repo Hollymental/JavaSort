@@ -15,6 +15,11 @@ public class User implements Comparable<User>{
 
     public String getEmail() {return email;} //получить почту
 
+    @Override
+    public String toString() {
+        return String.format("User [ name: %-10s password: %-10s email: %-10s ]", name, password, email);
+    }
+
     public int compareTo(User other){ //сравнение
         int result = this.name.compareTo(other.name);
         if (result == 0) {
