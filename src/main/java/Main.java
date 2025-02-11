@@ -1,18 +1,31 @@
 import java.util.Scanner;
 
+enum DataType {
+    BUS,
+    STUDENT,
+    USER
+}
+
 public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
+        /*
+        ---------------
+        3 строчки ниже вставить для считывания из файла
+        ---------------
+        User[] users = new FileUpload("users.xlsx").usersUpload();
+        Bus[] buses = new FileUpload("buses.xlsx").busesUpload();
+        Student[] students = new FileUpload("students.xlsx").studentsUpload();
 
-        FileUpload fileUpload = new FileUpload("users.xlsx");
-
-//        User[] users = new FileUpload("users.xlsx").usersUpload();
-//        Bus[] buses = new FileUpload("buses.xlsx").busesUpload();
-//        Student[] students = new FileUpload("students.xlsx").studentsUpload();
-//        fileUpload.dataUpload();
+        ---------------
+        3 строчки ниже для проверки что все корректно считалось
+        ---------------
         System.out.println(users[0].getName());
+        System.out.println(buses[0].getNumber());
+        System.out.println(students[0].getAverageScore());
+        */
         while (!exit) {
             System.out.println("Добро пожаловать в программу сортировки.");
             System.out.println("Выберите действие:");
@@ -54,8 +67,14 @@ public class Main {
         int dataType = scanner.nextInt();
 
         String[] text = {"", "", ""};
+/*
+        ---------------
+        Валидация введенных данных(text) по выбранному типу данных(dataType)
+        ---------------
+
         DataValidation dataValidation = new DataValidation(dataType);
         boolean isValid = dataValidation.validation(text);
+ */
         // Логика конструктора классов
     }
 
