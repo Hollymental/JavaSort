@@ -27,23 +27,22 @@ public class DataValidation {
     boolean busValidation(ArrayList<String> text) {
         String number = text.get(0);
         String model = text.get(1);
-        int mileage = 0;
-        try {
-            mileage = Integer.parseInt(text.get(2).trim());
-        } catch (NumberFormatException nfe) {
-            System.out.println("NumberFormatException: " + nfe.getMessage());
-        }
+   int mileage = Integer.parseInt(text.get(2));
+//        } catch (NumberFormatException nfe) {
+//            System.out.println("NumberFormatException: " + nfe.getMessage());
+//        }
         return 0 < mileage && mileage < 999999;
     }
 
-    boolean userValidation(ArrayList<String> text) {
+    boolean studentValidation (ArrayList<String> text) {
         String groupNumber = text.get(0);
         double averageScore = 0;
+//        int recordBookNumber = Integer.parseInt(text.get(2));
         String recordBookNumber = text.get(2);
-        return recordBookNumber.matches("^[A-Z]+[0-9]{5}$");
+        return recordBookNumber.matches("[0-9]{5}$");
     }
 
-    boolean studentValidation(ArrayList<String> text) {
+    boolean userValidation(ArrayList<String> text) {
 //        String name = text.get(0);
 //        String password = text.get(1);
         String email = text.get(2);

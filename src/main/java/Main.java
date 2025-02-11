@@ -8,6 +8,10 @@ public class Main {
 
 //        FileUpload fileUpload = new FileUpload("try.txt");
 //        fileUpload.dataUpload();
+
+        FileUpload fileUpload = new FileUpload("test.xlsx");
+        fileUpload.dataUpload();
+
         while (!exit) {
             System.out.println("Добро пожаловать в программу сортировки.");
             System.out.println("Выберите действие:");
