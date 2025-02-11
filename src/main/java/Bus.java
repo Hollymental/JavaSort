@@ -15,6 +15,11 @@ public class Bus implements Comparable<Bus>{
 
     public int getMileage() {return mileage;} //получить пробег
 
+    @Override
+    public String toString() {
+        return String.format("Bus [ number: %-10s model: %-10s mileage: %-7d ]", number, model, mileage);
+    }
+
     public int compareTo(Bus other) {
         int result = this.number.compareTo(other.number);
         if (result == 0) {
