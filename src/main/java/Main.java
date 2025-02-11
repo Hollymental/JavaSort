@@ -6,7 +6,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
 
-//        FileUpload fileUpload = new FileUpload("try.txt");
         FileUpload fileUpload = new FileUpload("users.xlsx");
 
 //        User[] users = new FileUpload("users.xlsx").usersUpload();
