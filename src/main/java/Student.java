@@ -15,6 +15,12 @@ public class Student implements Comparable<Student>{
 
     public int getRecordBookNumber() {return recordBookNumber;} //получить номер зачётной книжки
 
+    @Override
+    public String toString() {
+        return String.format("Student [ groupNumber: %-4s averageScore: %-5.2f recordBookNumber: %-5s ]"
+                , groupNumber, averageScore, recordBookNumber);
+    }
+
     public int compareTo(Student other){
         int result = this.groupNumber.compareTo(other.groupNumber);
         if (result == 0) {
