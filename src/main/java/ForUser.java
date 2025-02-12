@@ -118,7 +118,7 @@ public class ForUser {
             users[i] = ModelFactory.createUser(
                     InputScanner.getStringInput("Имя: "),
                     InputScanner.getStringInput("Пароль: "),
-                    InputScanner.getStringInput("Email: "));
+                    InputScanner.getUserEmail("Email: "));
         }
         printArray(users);
     }
