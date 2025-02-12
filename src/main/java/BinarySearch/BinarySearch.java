@@ -14,6 +14,7 @@ public class BinarySearch<T extends Comparable<T>> {
         if (high >= low) {
             int mid = low + (high - low) / 2;
 
+
             String midValue = getSearchKey(arr[mid]);
 
             int comparisonResult = midValue.compareTo(key);
