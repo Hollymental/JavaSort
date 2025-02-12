@@ -27,8 +27,7 @@ public class DataValidation {
         String model = text[1];
         int mileage = 0;
         try {
-            mileage = (int) Double.parseDouble(text[2]);
-//            mileage = Integer.parseInt(text[2]);
+            mileage = Integer.parseInt(text[2]);
         } catch (NumberFormatException nfe) {
             System.out.println("NumberFormatException: " + nfe.getMessage());
         }
@@ -40,15 +39,8 @@ public class DataValidation {
     public boolean studentValidation(String[] text) {
         String groupNumber = text[0];
         double averageScore = Double.parseDouble(text[1]);
-        int recordBookNumber = 0;
-        String recordBookNumberStr = "";
-        try {
-            recordBookNumber = (int) Double.parseDouble(text[2]);
-            recordBookNumberStr = String.valueOf(recordBookNumber);
-        } catch (NumberFormatException nfe) {
-            System.out.println("NumberFormatException: " + nfe.getMessage());
-        }
-        return recordBookNumberStr.matches("^[0-9]{4}$")
+        String recordBookNumber = text[2];
+        return recordBookNumber.matches("^[0-9]{4}$")
                 && averageScore >= 0
                 && averageScore <= 10
                 && groupNumber.matches("^Group-[0-9]$");
