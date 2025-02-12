@@ -1,4 +1,8 @@
-import org.apache.poi.ss.formula.functions.T;
+package Validation;
+
+import Clases.Bus;
+import Clases.Student;
+import Clases.User;
 
 public class DataValidation {
     private Class<?> dataType;
@@ -52,7 +56,7 @@ public class DataValidation {
 
     public boolean userValidation(String[] text) {
         String email = text[2];
-        return email.matches("^[\\w-]+@[\\w-]+(\\.[\\w-]+)*\\.[a-z]{2,}$");
+        return email.matches("^[\\.\\w-]+@[\\w-]+(\\.[\\w-]+)*\\.[a-z]{2,}$");
     }
 }
 

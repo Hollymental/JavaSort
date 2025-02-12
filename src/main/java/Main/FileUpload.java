@@ -1,10 +1,15 @@
+package Main;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.Iterator;
 
-import org.apache.poi.ss.formula.functions.T;
+import Clases.Bus;
+import Clases.Student;
+import Clases.User;
+import Validation.DataValidation;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -21,7 +26,7 @@ public class FileUpload {
         if (users.length < 0 || users.length > 7)
             return null;
 
-//        User[] users = new User[size];
+//        Clases.User[] users = new Clases.User[size];
         DataValidation dataValidation = new DataValidation(User.class);
         try {
             FileInputStream file = new FileInputStream(new File(this.filePath));
@@ -80,6 +85,7 @@ public class FileUpload {
                     buses[rowCount] = bus;
                 } else {
                     System.out.println("Данные из файла не валидны");
+                    System.out.println(busText[0] + " " + busText[1] + " "+ busText[2] + " ");
                 }
 
                 rowCount++;
@@ -97,7 +103,7 @@ public class FileUpload {
         if (students.length < 0 || students.length > 7)
             return null;
         DataValidation dataValidation = new DataValidation(Student.class);
-//        Student[] students = new Student[size];
+//        Clases.Student[] students = new Clases.Student[size];
         try {
             FileInputStream file = new FileInputStream(new File(this.filePath));
             XSSFWorkbook workbook = new XSSFWorkbook(file);

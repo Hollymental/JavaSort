@@ -1,3 +1,7 @@
+package Camparators;
+
+import Clases.Bus;
+
 public class BusComporators {
     public static class SortByNumber implements ComparatorStrategy<Bus> {
         @Override

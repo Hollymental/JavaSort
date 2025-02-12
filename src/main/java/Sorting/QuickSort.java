@@ -1,3 +1,5 @@
+package Sorting;
+
 public class QuickSort<T extends Comparable<T>> {
     public void sort(T[] arr) {
         quickSort(arr, 0, arr.length - 1);

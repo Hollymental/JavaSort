@@ -1,10 +1,12 @@
+package Validation;
+
 import java.util.Scanner;
 
 public class InputScanner {
 
     static Scanner scanner = new Scanner(System.in);
 
-    static int getIntInput(String prompt) {
+   public static int getIntInput(String prompt) {
         while (true) {
             System.out.print(prompt);
             String input = scanner.next();
@@ -15,12 +17,12 @@ public class InputScanner {
         }
     }
 
-    static String getStringInput(String prompt) {
+    public static String getStringInput(String prompt) {
         System.out.print(prompt);
         return scanner.next();
     }
 
-    static double getDoubleInput(String prompt) {
+    public static double getDoubleInput(String prompt) {
         while (true) {
             System.out.print(prompt);
             try {
@@ -31,7 +33,7 @@ public class InputScanner {
         }
     }
 
-    static String getBusNumberInput(String prompt) {
+    public static String getBusNumberInput(String prompt) {
         while (true) {
             System.out.print(prompt);
             String input = scanner.next();
@@ -42,7 +44,7 @@ public class InputScanner {
         }
     }
 
-    static String getBusModelInput(String prompt) {
+    public static String getBusModelInput(String prompt) {
         while (true) {
             System.out.print(prompt);
             String input = scanner.next();
@@ -53,7 +55,7 @@ public class InputScanner {
         }
     }
 
-    static String getStudentGroupInput(String prompt) {
+    public static String getStudentGroupInput(String prompt) {
         while (true) {
             System.out.print(prompt);
             String input = scanner.next();
@@ -64,7 +66,7 @@ public class InputScanner {
         }
     }
 
-    static int getStudentBookNumberInput(String prompt) {
+    public static int getStudentBookNumberInput(String prompt) {
         while (true) {
             System.out.print(prompt);
             String input = scanner.next();
@@ -75,14 +77,14 @@ public class InputScanner {
         }
     }
 
-    static String getUserEmail(String prompt) {
+    public static String getUserEmail(String prompt) {
         while (true) {
             System.out.print(prompt);
             String input = scanner.next();
-            if (input.matches("^Group-[0-9]$")) {
+            if (input.matches("^[\\w-]+@[\\w-]+(\\.[\\w-]+)*\\.[a-z]{2,}$")) {
                 return input;
             }
-            System.out.println("Пожалуйста, введите email пользователя в формате 'example@.com'");
+            System.out.println("Пожалуйста, введите email пользователя в формате 'example@example.com'");
         }
     }
 

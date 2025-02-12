@@ -1,3 +1,5 @@
+package Sorting;
+
 public class QuickSortStrategy<T extends Comparable<T>> implements SortingStrategy<T> {
 
     private final QuickSort<T> quickSort;

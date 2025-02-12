@@ -1,3 +1,5 @@
+package Clases;
+
 public class Bus implements Comparable<Bus>{
     private final String number; //номер
     private final String model; //модель

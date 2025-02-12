@@ -1,3 +1,6 @@
+package Sorting;
+
+import Camparators.ComparatorStrategy;
 
 public class QuickSortWithStrategy<T extends Comparable<T>> {
 
