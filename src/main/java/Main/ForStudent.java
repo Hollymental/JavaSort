@@ -74,7 +74,8 @@ public class ForStudent {
                     "1.  По номеру группы\n" +
                     "2.  По среднему балу\n" +
                     "3.  По номеру зачетной книжки\n" +
-                    "4.  Сохранить полученный массив в файл\n" +
+                    "4.  По номеру зачетной книжки (только чётные)\n" +
+                    "5.  Сохранить полученный массив в файл\n" +
                     "0.  Выход");
             int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
 
@@ -94,6 +95,11 @@ public class ForStudent {
                             new StudentComparators.SortByRecordBookNumber())).sort(students);
                     break;
                 case 4:
+                    EvenStudentResult evenStudentResult = fillEvenStudentArray(students);
+                    new QuickSortWithStrategy<>(new CompositeComparator<>(
+                            new StudentComparators.SortByRecordBookNumber())).evenSort(students, evenStudentResult.evenStudents, evenStudentResult.evenIndices);
+                    break;
+                case 5:
                     FileDownload fileDownload = new FileDownload("sortedstudents.xlsx");
                     fileDownload.createStudentFile(students);
                 case 12:
@@ -154,6 +160,26 @@ public class ForStudent {
         printArray(students);
     }
 
+    static EvenStudentResult fillEvenStudentArray(Student[] students){
+        int evenCount = 0; //количество чётных элементов
+        for (Student student : students) {
+            if (student.getRecordBookNumber() % 2 == 0){
+                evenCount++;
+            }
+        }
+        Student[] evenStudents = new Student[evenCount]; //массив чётных автобусов
+        int currentIndex = 0; //текущий чётный элемент
+        int[] evenIndices = new int[evenCount]; //индексы чётных элементов в изначальном массиве
+        for (int i = 0; i < students.length; i++){
+            if (students[i].getRecordBookNumber() % 2 == 0){
+                evenStudents[currentIndex] = students[i];
+                evenIndices[currentIndex] = i;
+                currentIndex++;
+            }
+        }
+        return new EvenStudentResult(evenStudents, evenIndices);
+    }
+
     public static void printArray(Student[] students) {
         System.out.println("Массив студентов: ");
         for (Student student : students) {
@@ -193,4 +219,13 @@ public class ForStudent {
         return InputScanner.getStringInput("Введите номер зачетной книжки для поиска: ");
     }
 
+    static class EvenStudentResult{
+        Student[] evenStudents;
+        int[] evenIndices;
+
+        EvenStudentResult(Student[] evenStudents, int[] evenIndices) {
+            this.evenStudents = evenStudents;
+            this.evenIndices = evenIndices;
+        }
+    }
 }

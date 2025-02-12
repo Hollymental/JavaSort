@@ -17,6 +17,7 @@ public class ForUser {
         processUsers(users);
     }
 
+    
     private static void processUsers(User[] users) {
         while (true) {
             System.out.println("Ваш выбор:\n" +
