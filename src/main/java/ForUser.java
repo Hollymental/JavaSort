@@ -124,6 +124,8 @@ public class ForUser {
     }
 
     private static void fillArrayFromFile(User[] users) {
+        users = new FileUpload("users.xlsx").usersUpload(users);
+        printArray(users);
 
     }
 

@@ -8,9 +8,9 @@ public class ModelFactory {
     private static String[] randomEmails = new String[]{"user123@example.com", "random456@mail.com", "testuser789@yahoo.com", "sample.email1@gmail.com", "demo_user234@outlook.com", "example567@domain.com", "user.name8@webmail.com", "unique_email9@provider.com", "email_test10@service.com", "randomuser11@site.com", "user12@example.org", "test.email13@mail.ru", "demo_user14@inbox.com", "sample.email15@post.com", "example16@webservice.com", "user17@domain.org", "random18@provider.net", "test19@service.co", "unique20@webmail.net", "email21@example.net"};
 
     public static Bus createRandomBus() {
-        String number = String.valueOf(random.nextInt(1000));
+        String number = String.valueOf(random.nextInt(100, 1000));
         String model = "Model-" + random.nextInt(10);
-        int mileage = random.nextInt(100000);
+        int mileage = random.nextInt(1000000);
 
         DataValidation dataValidation = new DataValidation(Bus.class);
         boolean isValid = dataValidation.validation(new String[]{number, model, String.valueOf(mileage)});
@@ -21,25 +21,51 @@ public class ModelFactory {
                     .setMileage(mileage)
                     .build();
         } else {
-            System.out.println("Данные не валидны");
+            System.out.println("Данные не валидны:");
+            System.out.println(number + " " + model + " " + mileage + "\n");
             return null;
         }
     }
 
     public static Student createRandomStudent() {
-        return new Student.StudentBuilder()
-                .setGroupNumber("Group-" + random.nextInt(10))
-                .setAverageScore(3 + random.nextDouble() * 2)
-                .setRecordBookNumber(random.nextInt(10000))
-                .build();
+        String groupNumber = "Group-" + random.nextInt(10);
+        double averageScore = 3 + random.nextDouble() * 2;
+        int recordBookNumber = random.nextInt(1000, 10000);
+
+        DataValidation dataValidation = new DataValidation(Student.class);
+        boolean isValid = dataValidation.validation(new String[]{groupNumber, String.valueOf(averageScore), String.valueOf(recordBookNumber)});
+        if (isValid) {
+            return new Student.StudentBuilder()
+                    .setGroupNumber(groupNumber)
+                    .setAverageScore(averageScore)
+                    .setRecordBookNumber(recordBookNumber)
+                    .build();
+        } else {
+            System.out.println("Данные не валидны");
+            System.out.println(groupNumber + " " + averageScore + " " + recordBookNumber + " ");
+            return null;
+        }
     }
 
     public static User createRandomUser() {
-        return new User.UserBuilder()
-                .setName(randomNames[random.nextInt(20)])
-                .setPassword(randomPasswords[random.nextInt(20)])
-                .setEmail(randomEmails[random.nextInt(20)])
-                .build();
+
+        String name = randomNames[random.nextInt(20)];
+        String password = randomPasswords[random.nextInt(20)];
+        String email = randomEmails[random.nextInt(20)];
+
+        DataValidation dataValidation = new DataValidation(User.class);
+        boolean isValid = dataValidation.validation(new String[]{name, password, email});
+        if (isValid) {
+            return new User.UserBuilder()
+                    .setName(name)
+                    .setPassword(password)
+                    .setEmail(email)
+                    .build();
+        } else {
+            System.out.println("Данные не валидны:");
+            System.out.println(name + " " + password + " " + email + "\n");
+            return null;
+        }
     }
 
     public static Bus createBus(String number, String model, int mileage) {
@@ -54,24 +80,40 @@ public class ModelFactory {
                     .build();
         } else {
             System.out.println("Введенные данные не валидны");
+            System.out.println(number + " " + model + " " + mileage + "\n");
             return null;
         }
     }
 
     public static Student createStudent(String groupNumber, double averageGrade, Integer studentBookNumber) {
-        return new Student.StudentBuilder()
-                .setGroupNumber(groupNumber)
-                .setAverageScore(averageGrade)
-                .setRecordBookNumber(studentBookNumber)
-                .build();
+        DataValidation dataValidation = new DataValidation(Student.class);
+        boolean isValid = dataValidation.validation(new String[]{groupNumber, String.valueOf(averageGrade), String.valueOf(studentBookNumber)});
+        if (isValid) {
+            return new Student.StudentBuilder()
+                    .setGroupNumber(groupNumber)
+                    .setAverageScore(averageGrade)
+                    .setRecordBookNumber(studentBookNumber)
+                    .build();
+        } else {
+            System.out.println("Введенные данные не валидны");
+            System.out.println(groupNumber + " " + averageGrade + " " + studentBookNumber + " ");
+            return null;
+        }
     }
 
     public static User createUser(String name, String password, String email) {
-        return new User.UserBuilder()
-                .setName(name)
-                .setPassword(password)
-                .setEmail(email)
-                .build();
+        DataValidation dataValidation = new DataValidation(User.class);
+        boolean isValid = dataValidation.validation(new String[]{name, password, email});
+        if (isValid) {
+            return new User.UserBuilder()
+                    .setName(name)
+                    .setPassword(password)
+                    .setEmail(email)
+                    .build();
+        } else {
+            System.out.println("Введенные данные не валидны");
+            System.out.println(name + " " + password + " " + email + "\n");
+            return null;
+        }
     }
-    
 }
