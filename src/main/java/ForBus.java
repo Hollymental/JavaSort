@@ -46,6 +46,7 @@ public class ForBus {
                         new BusComporators.SortByModel(),
                         new BusComporators.SortByMileage()
                 ));
+
         busQuickSortWithStrategy.sort(buses);
     //    SearchService<Bus> searchService = new SearchService<>();
     //    searchService.printSearchResult(buses, getSearchKey());
@@ -125,7 +126,8 @@ public class ForBus {
     }
 
     private static void fillArrayFromFile(Bus[] buses) {
-
+        buses = new FileUpload("buses.xlsx").busesUpload(buses);
+        printArray(buses);
     }
 
     public static void printArray(Bus[] buses) {
