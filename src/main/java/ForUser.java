@@ -115,10 +115,14 @@ public class ForUser {
 
     private static void fillArrayManually(User[] users) {
         for (int i = 0; i < users.length; i++) {
+
             users[i] = ModelFactory.createUser(
                     InputScanner.getStringInput("Имя: "),
                     InputScanner.getStringInput("Пароль: "),
                     InputScanner.getUserEmail("Email: "));
+            if (users[i]==null) {
+                i--;
+            }
         }
         printArray(users);
     }

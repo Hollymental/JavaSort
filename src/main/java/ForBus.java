@@ -121,6 +121,9 @@ public class ForBus {
                     InputScanner.getBusNumberInput("Номер: "),
                     InputScanner.getBusModelInput("Модель: "),
                     InputScanner.getIntInput("Пробег: "));
+            if (buses[i]==null) {
+                i--;
+            }
         }
         printArray(buses);
     }
