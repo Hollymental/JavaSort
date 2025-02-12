@@ -1,4 +1,4 @@
-package Camparators;
+package Comparators;
 
 import Clases.Bus;
 

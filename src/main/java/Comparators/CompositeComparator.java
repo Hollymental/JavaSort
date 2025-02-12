@@ -1,4 +1,4 @@
-package Camparators;
+package Comparators;
 
 public class CompositeComparator<T extends Comparable<T>> implements ComparatorStrategy<T> {
     private ComparatorStrategy<T>[] strategies;

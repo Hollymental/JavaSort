@@ -1,7 +1,7 @@
 package Main;
 
-import Camparators.BusComporators;
-import Camparators.CompositeComparator;
+import Comparators.BusComporators;
+import Comparators.CompositeComparator;
 import Clases.Bus;
 import Clases.ModelFactory;
 import Sorting.QuickSortWithStrategy;

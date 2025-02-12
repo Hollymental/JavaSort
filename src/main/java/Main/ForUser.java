@@ -1,7 +1,7 @@
 package Main;
 
-import Camparators.CompositeComparator;
-import Camparators.UserComparators;
+import Comparators.CompositeComparator;
+import Comparators.UserComparators;
 import Clases.ModelFactory;
 import Clases.User;
 import Sorting.QuickSortWithStrategy;
