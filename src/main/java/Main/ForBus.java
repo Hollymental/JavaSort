@@ -4,6 +4,8 @@ import Comparators.BusComporators;
 import Comparators.CompositeComparator;
 import Clases.Bus;
 import Clases.ModelFactory;
+import Filework.FileDownload;
+import Filework.FileUpload;
 import Sorting.QuickSortWithStrategy;
 import Validation.InputScanner;
 
@@ -21,6 +23,7 @@ public class ForBus {
                     "1.  Быстрая сортировка\n" +
                     "2.  Кастомная сортировка\n" +
                     "3.  Бинарный поиск\n" +
+                    "4.  Сохранить полученный массив в файл\n" +
                     "0.  Выход.");
             int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
             switch (choice) {
@@ -40,6 +43,10 @@ public class ForBus {
                     break;
                 case 3:
                     busBinarySearch(buses);
+                    break;
+                case 4:
+                    FileDownload fileDownload = new FileDownload("sortedbuses.xlsx");
+                    fileDownload.createBusFile(buses);
                     break;
                 default:
                     System.out.println("Неверный выбор");
@@ -67,6 +74,7 @@ public class ForBus {
                     "1.  По номеру автобуса\n" +
                     "2.  По модели\n" +
                     "3.  По пробегу\n" +
+                    "4.  Сохранить полученный массив в файл\n" +
                     "0.  Выход");
             int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
 
@@ -85,6 +93,9 @@ public class ForBus {
                     new QuickSortWithStrategy<>(new CompositeComparator<>(
                             new BusComporators.SortByMileage())).sort(buses);
                     break;
+                case 4:
+                    FileDownload fileDownload = new FileDownload("sortedbuses.xlsx");
+                    fileDownload.createBusFile(buses);
                 case 12:
                     new QuickSortWithStrategy<>(new CompositeComparator<>(
                             new BusComporators.SortByNumber(), new BusComporators.SortByModel())).sort(buses);

@@ -4,6 +4,8 @@ import Comparators.CompositeComparator;
 import Comparators.StudentComparators;
 import Clases.ModelFactory;
 import Clases.Student;
+import Filework.FileDownload;
+import Filework.FileUpload;
 import Sorting.QuickSortWithStrategy;
 import Validation.InputScanner;
 
@@ -21,6 +23,7 @@ public class ForStudent {
                     "1.  Быстрая сортировка\n" +
                     "2.  Кастомная сортировка\n" +
                     "3.  Бинарный поиск\n" +
+                    "4.  Сохранить полученный массив в файл\n" +
                     "0.  Выход.");
             int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
             switch (choice) {
@@ -40,6 +43,10 @@ public class ForStudent {
                     break;
                 case 3:
                     studentBinarySearch(students);
+                    break;
+                case 4:
+                    FileDownload fileDownload = new FileDownload("sortedstudents.xlsx");
+                    fileDownload.createStudentFile(students);
                     break;
                 default:
                     System.out.println("Неверный выбор");
@@ -66,6 +73,7 @@ public class ForStudent {
                     "1.  По номеру группы\n" +
                     "2.  По среднему балу\n" +
                     "3.  По номеру зачетной книжки\n" +
+                    "4.  Сохранить полученный массив в файл\n" +
                     "0.  Выход");
             int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
 
@@ -84,6 +92,9 @@ public class ForStudent {
                     new QuickSortWithStrategy<>(new CompositeComparator<>(
                             new StudentComparators.SortByRecordBookNumber())).sort(students);
                     break;
+                case 4:
+                    FileDownload fileDownload = new FileDownload("sortedstudents.xlsx");
+                    fileDownload.createStudentFile(students);
                 case 12:
                     new QuickSortWithStrategy<>(new CompositeComparator<>(
                             new StudentComparators.SortByGroupNumber(), new StudentComparators.SortByAverageScore())).sort(students);

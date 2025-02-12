@@ -4,6 +4,8 @@ import Comparators.CompositeComparator;
 import Comparators.UserComparators;
 import Clases.ModelFactory;
 import Clases.User;
+import Filework.FileDownload;
+import Filework.FileUpload;
 import Sorting.QuickSortWithStrategy;
 import Validation.InputScanner;
 
@@ -20,6 +22,7 @@ public class ForUser {
                     "1.  Быстрая сортировка\n" +
                     "2.  Кастомная сортировка\n" +
                     "3.  Бинарный поиск\n" +
+                    "4.  Сохранить полученный массив в файл\n" +
                     "0.  Выход.");
             int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
             switch (choice) {
@@ -40,6 +43,11 @@ public class ForUser {
                 case 3:
                     userBinarySearch(users);
                     break;
+                case 4:
+                    FileDownload fileDownload = new FileDownload("sortedusers.xlsx");
+                    fileDownload.createUserFile(users);
+                    break;
+
                 default:
                     System.out.println("Неверный выбор");
                     break;
@@ -65,6 +73,7 @@ public class ForUser {
                     "1.  По имени\n" +
                     "2.  По паролю\n" +
                     "3.  По email\n" +
+                    "4.  Сохранить полученный массив в файл\n" +
                     "0.  Выход");
             int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
 
@@ -82,6 +91,10 @@ public class ForUser {
                 case 3:
                     new QuickSortWithStrategy<>(new CompositeComparator<>(
                             new UserComparators.SortByEmail())).sort(users);
+                    break;
+                case 4:
+                    FileDownload fileDownload = new FileDownload("sortedusers.xlsx");
+                    fileDownload.createUserFile(users);
                     break;
                 case 12:
                     new QuickSortWithStrategy<>(new CompositeComparator<>(
