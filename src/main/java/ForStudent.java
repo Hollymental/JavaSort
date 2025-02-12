@@ -46,9 +46,9 @@ public class ForStudent {
                         new StudentComparators.SortByAverageScore(),
                         new StudentComparators.SortByRecordBookNumber()
                 ));
-        studentQuickSortWithStrategy.sort(students);
-        SearchService<Student> searchService = new SearchService<>();
-        searchService.printSearchResult(students, getSearchKey());
+//        studentQuickSortWithStrategy.sort(students);
+//        SearchService<Student> searchService = new SearchService<>();
+//        searchService.printSearchResult(students, getSearchKey());
     }
 
     private static void chooseCustomSort(Student[] students) {
