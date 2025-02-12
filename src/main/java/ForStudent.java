@@ -118,13 +118,12 @@ public class ForStudent {
         for (int i = 0; i < students.length; i++) {
 
             students[i] = ModelFactory.createStudent(
-                    InputScanner.getStringInput("Номер группы: "),
+                    InputScanner.getStudentGroupInput("Номер группы: "),
                     InputScanner.getDoubleInput("Средний бал: "),
-                    InputScanner.getIntInput("Номер зачетной книжки: "));
+                    InputScanner.getStudentBookNumberInput("Номер зачетной книжки: "));;
             if (students[i]==null) {
                 i--;
             }
-
         }
         printArray(students);
     }

@@ -118,8 +118,8 @@ public class ForBus {
     private static void fillArrayManually(Bus[] buses) {
         for (int i = 0; i < buses.length; i++) {
             buses[i] = ModelFactory.createBus(
-                    InputScanner.getStringInput("Номер: "),
-                    InputScanner.getStringInput("Модель: "),
+                    InputScanner.getBusNumberInput("Номер: "),
+                    InputScanner.getBusModelInput("Модель: "),
                     InputScanner.getIntInput("Пробег: "));
             if (buses[i]==null) {
                 i--;
