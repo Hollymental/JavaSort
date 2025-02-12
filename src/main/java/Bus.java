@@ -9,6 +9,17 @@ public class Bus implements Comparable<Bus>{
         this.mileage = mileage;
     }
 
+    public String getNumber() {return number;} //получить номер
+
+    public String getModel() {return model;} //получить модель
+
+    public int getMileage() {return mileage;} //получить пробег
+
+    @Override
+    public String toString() {
+        return String.format("Bus [ number: %-10s model: %-10s mileage: %-7d ]", number, model, mileage);
+    }
+
     public int compareTo(Bus other) {
         int result = this.number.compareTo(other.number);
         if (result == 0) {
@@ -25,17 +36,17 @@ public class Bus implements Comparable<Bus>{
         private String model; //модель
         private int mileage; //пробег
 
-        public BusBuilder number(String number){
+        public BusBuilder setNumber(String number){
             this.number = number;
             return this;
         }
 
-        public BusBuilder model(String model){
+        public BusBuilder setModel(String model){
             this.model = model;
             return this;
         }
 
-        public BusBuilder mileage(int mileage){
+        public BusBuilder setMileage(int mileage){
             this.mileage = mileage;
             return this;
         }
@@ -45,8 +56,4 @@ public class Bus implements Comparable<Bus>{
         }
     }
 
-    @Override
-    public String toString() {
-        return number + " " + model + " " + mileage;
-    }
 }
