@@ -1,3 +1,7 @@
+package Comparators;
+
+import Clases.Student;
+
 public class StudentComparators {
     public static class SortByGroupNumber implements ComparatorStrategy<Student> {
         @Override

@@ -1,3 +1,14 @@
+package Main;
+
+import Comparators.BusComporators;
+import Comparators.CompositeComparator;
+import Clases.Bus;
+import Clases.ModelFactory;
+import Filework.FileDownload;
+import Filework.FileUpload;
+import Sorting.QuickSortWithStrategy;
+import Validation.InputScanner;
+
 public class ForBus {
 
     public static void run(String[] args) {
@@ -12,6 +23,7 @@ public class ForBus {
                     "1.  Быстрая сортировка\n" +
                     "2.  Кастомная сортировка\n" +
                     "3.  Бинарный поиск\n" +
+                    "4.  Сохранить полученный массив в файл\n" +
                     "0.  Выход.");
             int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
             switch (choice) {
@@ -32,6 +44,10 @@ public class ForBus {
                 case 3:
                     busBinarySearch(buses);
                     break;
+                case 4:
+                    FileDownload fileDownload = new FileDownload("sortedbuses.xlsx");
+                    fileDownload.createBusFile(buses);
+                    break;
                 default:
                     System.out.println("Неверный выбор");
                     break;
@@ -46,8 +62,9 @@ public class ForBus {
                         new BusComporators.SortByModel(),
                         new BusComporators.SortByMileage()
                 ));
+
         busQuickSortWithStrategy.sort(buses);
-    //    SearchService<Bus> searchService = new SearchService<>();
+    //    SearchService<Clases.Bus> searchService = new SearchService<>();
     //    searchService.printSearchResult(buses, getSearchKey());
     }
 
@@ -57,6 +74,8 @@ public class ForBus {
                     "1.  По номеру автобуса\n" +
                     "2.  По модели\n" +
                     "3.  По пробегу\n" +
+                    "4.  По пробегу (только чётные)\n" +
+                    "5.  Сохранить полученный массив в файл\n" +
                     "0.  Выход");
             int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
 
@@ -75,6 +94,14 @@ public class ForBus {
                     new QuickSortWithStrategy<>(new CompositeComparator<>(
                             new BusComporators.SortByMileage())).sort(buses);
                     break;
+                case 4:
+                    EvenBusResult evenBusResult = fillEvenBusArray(buses);
+                    new QuickSortWithStrategy<>(new CompositeComparator<>(
+                            new BusComporators.SortByMileage())).evenSort(buses, evenBusResult.evenBuses, evenBusResult.evenIndices);
+                    break;
+                case 5:
+                    FileDownload fileDownload = new FileDownload("sortedbuses.xlsx");
+                    fileDownload.createBusFile(buses);
                 case 12:
                     new QuickSortWithStrategy<>(new CompositeComparator<>(
                             new BusComporators.SortByNumber(), new BusComporators.SortByModel())).sort(buses);
@@ -117,15 +144,39 @@ public class ForBus {
     private static void fillArrayManually(Bus[] buses) {
         for (int i = 0; i < buses.length; i++) {
             buses[i] = ModelFactory.createBus(
-                    InputScanner.getStringInput("Номер: "),
-                    InputScanner.getStringInput("Модель: "),
+                    InputScanner.getBusNumberInput("Номер: "),
+                    InputScanner.getBusModelInput("Модель: "),
                     InputScanner.getIntInput("Пробег: "));
+            if (buses[i]==null) {
+                i--;
+            }
         }
         printArray(buses);
     }
 
     private static void fillArrayFromFile(Bus[] buses) {
+        buses = new FileUpload("buses.xlsx").busesUpload(buses);
+        printArray(buses);
+    }
 
+    static EvenBusResult fillEvenBusArray(Bus[] buses){
+        int evenCount = 0; //количество чётных элементов
+        for (Bus bus : buses) {
+            if (bus.getMileage() % 2 == 0){
+                evenCount++;
+            }
+        }
+        Bus[] evenBuses = new Bus[evenCount]; //массив чётных автобусов
+        int currentIndex = 0; //текущий чётный элемент
+        int[] evenIndices = new int[evenCount]; //индексы чётных элементов в изначальном массиве
+        for (int i = 0; i < buses.length; i++){
+            if (buses[i].getMileage() % 2 == 0){
+                evenBuses[currentIndex] = buses[i];
+                evenIndices[currentIndex] = i;
+                currentIndex++;
+            }
+        }
+        return new EvenBusResult(evenBuses, evenIndices);
     }
 
     public static void printArray(Bus[] buses) {
@@ -167,4 +218,13 @@ public class ForBus {
         return InputScanner.getStringInput("Введите номер автобуса для поиска: ");
     }
 
+    static class EvenBusResult{
+        Bus[] evenBuses;
+        int[] evenIndices;
+
+        EvenBusResult(Bus[] evenBuses, int[] evenIndices) {
+            this.evenBuses = evenBuses;
+            this.evenIndices = evenIndices;
+        }
+    }
 }

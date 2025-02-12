@@ -1,3 +1,7 @@
+import Main.ForBus;
+import Main.ForStudent;
+import Main.ForUser;
+
 import java.util.Scanner;
 
 public class StartMenu {
@@ -22,7 +26,7 @@ public class StartMenu {
                     ForStudent.run(args);
                     break;
                 case 3:
-                    ForUser.run(args);
+                      ForUser.run(args);
                     break;
                 case 0:
                     System.out.println("Программа завершена.");

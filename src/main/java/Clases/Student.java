@@ -1,3 +1,5 @@
+package Clases;
+
 public class Student implements Comparable<Student>{
     private final String groupNumber; //номер группы
     private final double averageScore; //средний балл

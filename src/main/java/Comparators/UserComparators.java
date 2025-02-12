@@ -1,3 +1,7 @@
+package Comparators;
+
+import Clases.User;
+
 public class UserComparators {
 
     public static class SortByName implements ComparatorStrategy<User> {

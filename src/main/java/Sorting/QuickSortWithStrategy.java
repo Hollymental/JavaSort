@@ -1,3 +1,6 @@
+package Sorting;
+
+import Comparators.ComparatorStrategy;
 
 public class QuickSortWithStrategy<T extends Comparable<T>> {
 
@@ -14,6 +17,14 @@ public class QuickSortWithStrategy<T extends Comparable<T>> {
     public void sort(T[] items) {
         quickSort(items, 0, items.length - 1);
         printArray(items);
+    }
+
+    public void evenSort(T[] originalItems, T[] evenItems, int[] evenIndices){
+        quickSort(evenItems, 0, evenItems.length - 1);
+        for (int i = 0; i < evenItems.length; i++){
+            originalItems[evenIndices[i]] = evenItems[i];
+        }
+        printArray(originalItems);
     }
 
     private void quickSort(T[] items, int low, int high) {

@@ -1,3 +1,14 @@
+package Main;
+
+import Comparators.CompositeComparator;
+import Comparators.UserComparators;
+import Clases.ModelFactory;
+import Clases.User;
+import Filework.FileDownload;
+import Filework.FileUpload;
+import Sorting.QuickSortWithStrategy;
+import Validation.InputScanner;
+
 public class ForUser {
     public static void run(String[] args) {
 
@@ -5,12 +16,14 @@ public class ForUser {
         processUsers(users);
     }
 
+    
     private static void processUsers(User[] users) {
         while (true) {
             System.out.println("Ваш выбор:\n" +
                     "1.  Быстрая сортировка\n" +
                     "2.  Кастомная сортировка\n" +
                     "3.  Бинарный поиск\n" +
+                    "4.  Сохранить полученный массив в файл\n" +
                     "0.  Выход.");
             int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
             switch (choice) {
@@ -31,6 +44,11 @@ public class ForUser {
                 case 3:
                     userBinarySearch(users);
                     break;
+                case 4:
+                    FileDownload fileDownload = new FileDownload("sortedusers.xlsx");
+                    fileDownload.createUserFile(users);
+                    break;
+
                 default:
                     System.out.println("Неверный выбор");
                     break;
@@ -46,7 +64,7 @@ public class ForUser {
                         new UserComparators.SortByEmail()
                 ));
         userQuickSortWithStrategy.sort(users);
-//        SearchService<User> searchService = new SearchService<>();
+//        SearchService<Clases.User> searchService = new SearchService<>();
 //        searchService.printSearchResult(users, getSearchKey());
     }
 
@@ -56,6 +74,7 @@ public class ForUser {
                     "1.  По имени\n" +
                     "2.  По паролю\n" +
                     "3.  По email\n" +
+                    "4.  Сохранить полученный массив в файл\n" +
                     "0.  Выход");
             int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
 
@@ -73,6 +92,10 @@ public class ForUser {
                 case 3:
                     new QuickSortWithStrategy<>(new CompositeComparator<>(
                             new UserComparators.SortByEmail())).sort(users);
+                    break;
+                case 4:
+                    FileDownload fileDownload = new FileDownload("sortedusers.xlsx");
+                    fileDownload.createUserFile(users);
                     break;
                 case 12:
                     new QuickSortWithStrategy<>(new CompositeComparator<>(
@@ -115,15 +138,21 @@ public class ForUser {
 
     private static void fillArrayManually(User[] users) {
         for (int i = 0; i < users.length; i++) {
+
             users[i] = ModelFactory.createUser(
                     InputScanner.getStringInput("Имя: "),
                     InputScanner.getStringInput("Пароль: "),
-                    InputScanner.getStringInput("Email: "));
+                    InputScanner.getUserEmail("Email: "));
+            if (users[i]==null) {
+                i--;
+            }
         }
         printArray(users);
     }
 
     private static void fillArrayFromFile(User[] users) {
+        users = new FileUpload("users.xlsx").usersUpload(users);
+        printArray(users);
 
     }
 

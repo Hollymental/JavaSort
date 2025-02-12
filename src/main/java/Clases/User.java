@@ -1,3 +1,5 @@
+package Clases;
+
 public class User implements Comparable<User>{
     private final String name; //имя
     private final String password; //пароль
