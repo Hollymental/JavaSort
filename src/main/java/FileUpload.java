@@ -10,15 +10,18 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class FileUpload {
-    String filePath;
+    private final String filePath;
 
     public FileUpload(String fileName) {
         this.filePath = Paths.get("").toAbsolutePath().toString() + "\\files\\" + fileName;
     }
 
-    User[] usersUpload() {
-        User[] users = new User[7];
-        DataValidation dataValidation = new DataValidation(DataType.USER);
+    public User[] usersUpload(int size) {
+        if (size<0 || size>7)
+            return null;
+
+        User[] users = new User[size];
+        DataValidation dataValidation = new DataValidation(User.class);
         try {
             FileInputStream file = new FileInputStream(new File(this.filePath));
             XSSFWorkbook workbook = new XSSFWorkbook(file);
@@ -26,7 +29,7 @@ public class FileUpload {
 
             Iterator<Row> rowIterator = sheet.iterator();
             int rowCount = 0;
-            while (rowIterator.hasNext()) {
+            while (rowIterator.hasNext() && rowCount < size) {
                 Row row = rowIterator.next();
                 Iterator<Cell> cellIterator = row.cellIterator();
                 String[] userText = getRowInfo(cellIterator);
@@ -51,9 +54,11 @@ public class FileUpload {
         return users;
     }
 
-    Bus[] busesUpload() {
-        Bus[] buses = new Bus[7];
-        DataValidation dataValidation = new DataValidation(DataType.BUS);
+    public Bus[] busesUpload(int size) {
+        if (size<0 || size>7)
+            return null;
+        Bus[] buses = new Bus[size];
+        DataValidation dataValidation = new DataValidation(Bus.class);
         try {
             FileInputStream file = new FileInputStream(new File(this.filePath));
             XSSFWorkbook workbook = new XSSFWorkbook(file);
@@ -61,7 +66,7 @@ public class FileUpload {
 
             Iterator<Row> rowIterator = sheet.iterator();
             int rowCount = 0;
-            while (rowIterator.hasNext()) {
+            while (rowIterator.hasNext() && rowCount < size) {
                 Row row = rowIterator.next();
                 Iterator<Cell> cellIterator = row.cellIterator();
                 String[] busText = getRowInfo(cellIterator);
@@ -87,9 +92,12 @@ public class FileUpload {
         return buses;
     }
 
-    Student[] studentsUpload() {
-        DataValidation dataValidation = new DataValidation(DataType.STUDENT);
-        Student[] students = new Student[7];
+    public Student[] studentsUpload(int size) {
+
+        if (size<0 || size>7)
+            return null;
+        DataValidation dataValidation = new DataValidation(Student.class);
+        Student[] students = new Student[size];
         try {
             FileInputStream file = new FileInputStream(new File(this.filePath));
             XSSFWorkbook workbook = new XSSFWorkbook(file);
@@ -97,7 +105,7 @@ public class FileUpload {
 
             Iterator<Row> rowIterator = sheet.iterator();
             int rowCount = 0;
-            while (rowIterator.hasNext()) {
+            while (rowIterator.hasNext() && rowCount < size) {
                 Row row = rowIterator.next();
                 Iterator<Cell> cellIterator = row.cellIterator();
                 String[] studentText = getRowInfo(cellIterator);
@@ -122,7 +130,7 @@ public class FileUpload {
         return students;
     }
 
-    String[] getRowInfo(Iterator<Cell> cellIterator) {
+    public String[] getRowInfo(Iterator<Cell> cellIterator) {
         String[] objectText = new String[3];
         int cellCount = 0;
         while (cellIterator.hasNext()) {
