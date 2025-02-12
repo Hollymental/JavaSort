@@ -1,4 +1,4 @@
-package Clases;
+package Classes;
 
 public class Bus implements Comparable<Bus>{
     private final String number; //номер

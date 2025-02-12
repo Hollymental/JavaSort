@@ -1,9 +1,10 @@
 package Main;
 
+import BinarySearch.SearchService;
 import Comparators.CompositeComparator;
 import Comparators.StudentComparators;
-import Clases.ModelFactory;
-import Clases.Student;
+import Classes.ModelFactory;
+import Classes.Student;
 import Filework.FileDownload;
 import Filework.FileUpload;
 import Sorting.QuickSortWithStrategy;
@@ -58,13 +59,13 @@ public class ForStudent {
     private static void studentBinarySearch(Student[] students) {
         QuickSortWithStrategy<Student> studentQuickSortWithStrategy = new QuickSortWithStrategy<>
                 (new CompositeComparator<>(
+                        new StudentComparators.SortByRecordBookNumber(),
                         new StudentComparators.SortByGroupNumber(),
-                        new StudentComparators.SortByAverageScore(),
-                        new StudentComparators.SortByRecordBookNumber()
-                ));
+                        new StudentComparators.SortByAverageScore()
+                                        ));
         studentQuickSortWithStrategy.sort(students);
-//        SearchService<Clases.Student> searchService = new SearchService<>();
-//        searchService.printSearchResult(students, getSearchKey());
+        SearchService<Student> searchService = new SearchService<Student>();
+        searchService.printSearchResult(students, getSearchKey());
     }
 
     private static void chooseCustomSort(Student[] students) {
@@ -189,7 +190,7 @@ public class ForStudent {
     }
 
     private static String getSearchKey() {
-        return InputScanner.getStringInput("Введите номер автобуса для поиска: ");
+        return InputScanner.getStringInput("Введите номер зачетной книжки для поиска: ");
     }
 
 }

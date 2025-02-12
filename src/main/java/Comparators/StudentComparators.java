@@ -1,6 +1,6 @@
 package Comparators;
 
-import Clases.Student;
+import Classes.Student;
 
 public class StudentComparators {
     public static class SortByGroupNumber implements ComparatorStrategy<Student> {

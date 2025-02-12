@@ -1,6 +1,8 @@
-import Clases.Bus;
-import Clases.Student;
-import Clases.User;
+package BinarySearch;
+
+import Classes.Bus;
+import Classes.Student;
+import Classes.User;
 
 public class BinarySearch<T extends Comparable<T>> {
 

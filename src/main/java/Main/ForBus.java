@@ -1,9 +1,10 @@
 package Main;
 
+import BinarySearch.SearchService;
 import Comparators.BusComporators;
 import Comparators.CompositeComparator;
-import Clases.Bus;
-import Clases.ModelFactory;
+import Classes.Bus;
+import Classes.ModelFactory;
 import Filework.FileDownload;
 import Filework.FileUpload;
 import Sorting.QuickSortWithStrategy;
@@ -64,8 +65,8 @@ public class ForBus {
                 ));
 
         busQuickSortWithStrategy.sort(buses);
-    //    SearchService<Clases.Bus> searchService = new SearchService<>();
-    //    searchService.printSearchResult(buses, getSearchKey());
+        SearchService<Bus> searchService = new SearchService<Bus>();
+        searchService.printSearchResult(buses, getSearchKey());
     }
 
     private static void chooseCustomSort(Bus[] buses) {

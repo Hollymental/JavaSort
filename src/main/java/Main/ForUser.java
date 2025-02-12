@@ -1,9 +1,10 @@
 package Main;
 
+import BinarySearch.SearchService;
 import Comparators.CompositeComparator;
 import Comparators.UserComparators;
-import Clases.ModelFactory;
-import Clases.User;
+import Classes.ModelFactory;
+import Classes.User;
 import Filework.FileDownload;
 import Filework.FileUpload;
 import Sorting.QuickSortWithStrategy;
@@ -63,8 +64,8 @@ public class ForUser {
                         new UserComparators.SortByEmail()
                 ));
         userQuickSortWithStrategy.sort(users);
-//        SearchService<Clases.User> searchService = new SearchService<>();
-//        searchService.printSearchResult(users, getSearchKey());
+        SearchService<User> searchService = new SearchService<User>();
+        searchService.printSearchResult(users, getSearchKey());
     }
 
     private static void chooseCustomSort(User[] users) {

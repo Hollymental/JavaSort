@@ -1,4 +1,4 @@
-package Clases;
+package Classes;
 
 public class Student implements Comparable<Student>{
     private final String groupNumber; //номер группы
