@@ -1,4 +1,4 @@
-package Clases;
+package Classes;
 
 public class User implements Comparable<User>{
     private final String name; //имя

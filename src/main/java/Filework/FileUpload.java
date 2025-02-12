@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.util.Iterator;
 
-import Clases.Bus;
-import Clases.Student;
-import Clases.User;
+import Classes.Bus;
+import Classes.Student;
+import Classes.User;
 import Validation.DataValidation;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;

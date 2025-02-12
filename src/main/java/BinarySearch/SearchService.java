@@ -1,9 +1,10 @@
-public class SearchService<T extends Comparable<T>> {
+package BinarySearch;
 
+public class SearchService<T extends Comparable<T>> {
     private final BinarySearch<T> binarySearch;
 
     public SearchService() {
-        this.binarySearch = new BinarySearch<>();
+        this.binarySearch = new BinarySearch<T>();
     }
 
     public int search(T[] array, String key) {
