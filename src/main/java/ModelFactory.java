@@ -8,11 +8,22 @@ public class ModelFactory {
     private static String[] randomEmails = new String[]{"user123@example.com", "random456@mail.com", "testuser789@yahoo.com", "sample.email1@gmail.com", "demo_user234@outlook.com", "example567@domain.com", "user.name8@webmail.com", "unique_email9@provider.com", "email_test10@service.com", "randomuser11@site.com", "user12@example.org", "test.email13@mail.ru", "demo_user14@inbox.com", "sample.email15@post.com", "example16@webservice.com", "user17@domain.org", "random18@provider.net", "test19@service.co", "unique20@webmail.net", "email21@example.net"};
 
     public static Bus createRandomBus() {
-        return new Bus.BusBuilder()
-                .setNumber(String.valueOf(random.nextInt(1000)))
-                .setModel("Model-" + random.nextInt(10))
-                .setMileage(random.nextInt(100000))
-                .build();
+        String number = String.valueOf(random.nextInt(1000));
+        String model = "Model-" + random.nextInt(10);
+        int mileage = random.nextInt(100000);
+
+        DataValidation dataValidation = new DataValidation(Bus.class);
+        boolean isValid = dataValidation.validation(new String[]{number, model, String.valueOf(mileage)});
+        if (isValid) {
+            return new Bus.BusBuilder()
+                    .setNumber(number)
+                    .setModel(model)
+                    .setMileage(mileage)
+                    .build();
+        } else {
+            System.out.println("Данные не валидны");
+            return null;
+        }
     }
 
     public static Student createRandomStudent() {
@@ -32,11 +43,19 @@ public class ModelFactory {
     }
 
     public static Bus createBus(String number, String model, int mileage) {
-        return new Bus.BusBuilder()
-                .setNumber(number)
-                .setModel(model)
-                .setMileage(mileage)
-                .build();
+        DataValidation dataValidation = new DataValidation(Bus.class);
+        boolean isValid = dataValidation.validation(new String[]{number, model, String.valueOf(mileage)});
+        if (isValid) {
+
+            return new Bus.BusBuilder()
+                    .setNumber(number)
+                    .setModel(model)
+                    .setMileage(mileage)
+                    .build();
+        } else {
+            System.out.println("Введенные данные не валидны");
+            return null;
+        }
     }
 
     public static Student createStudent(String groupNumber, double averageGrade, Integer studentBookNumber) {

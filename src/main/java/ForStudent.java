@@ -46,7 +46,7 @@ public class ForStudent {
                         new StudentComparators.SortByAverageScore(),
                         new StudentComparators.SortByRecordBookNumber()
                 ));
-//        studentQuickSortWithStrategy.sort(students);
+        studentQuickSortWithStrategy.sort(students);
 //        SearchService<Student> searchService = new SearchService<>();
 //        searchService.printSearchResult(students, getSearchKey());
     }
@@ -125,11 +125,12 @@ public class ForStudent {
     }
 
     private static void fillArrayFromFile(Student[] students) {
-
+        students = new FileUpload("students.xlsx").studentsUpload(students);
+        printArray(students);
     }
 
     public static void printArray(Student[] students) {
-        System.out.println("Массив автобусов: ");
+        System.out.println("Массив студентов: ");
         for (Student student : students) {
             System.out.println(student);
         }

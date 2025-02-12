@@ -41,17 +41,29 @@ public class DataValidation {
         } catch (NumberFormatException nfe) {
             System.out.println("NumberFormatException: " + nfe.getMessage());
         }
-        return 0 < mileage && mileage < 999999;
+        return 0 < mileage && mileage < 999999
+                && model.matches("^Model-[0-9]$")
+                && number.matches("^[0-9][0-9][0-9]$");
     }
 
     public boolean studentValidation(String[] text) {
+
+//        System.out.println(text[0] + " " + text[1] + " " + text[2]);
         String groupNumber = text[0];
         double averageScore = Double.parseDouble(text[1]);
 //        int recordBookNumber = (int) Double.parseDouble(text[2]);
-        String recordBookNumber = text[2];
-        return recordBookNumber.matches("[0-9]{5}$")
+        int recordBookNumber = 0;
+        String recordBookNumberStr = "";
+        try {
+            recordBookNumber = (int) Double.parseDouble(text[2]);
+//            mileage = Integer.parseInt(text[2]);
+            recordBookNumberStr = String.valueOf(recordBookNumber);
+        } catch (NumberFormatException nfe) {
+            System.out.println("NumberFormatException: " + nfe.getMessage());
+        }
+        return recordBookNumberStr.matches("^[0-9]{5}$")
                 && averageScore >= 0
-                && averageScore <= 5;
+                && averageScore <= 10;
     }
 
     public boolean userValidation(String[] text) {
