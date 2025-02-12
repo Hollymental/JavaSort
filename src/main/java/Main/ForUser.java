@@ -1,3 +1,12 @@
+package Main;
+
+import Camparators.CompositeComparator;
+import Camparators.UserComparators;
+import Clases.ModelFactory;
+import Clases.User;
+import Sorting.QuickSortWithStrategy;
+import Validation.InputScanner;
+
 public class ForUser {
     public static void run(String[] args) {
 
@@ -46,7 +55,7 @@ public class ForUser {
                         new UserComparators.SortByEmail()
                 ));
         userQuickSortWithStrategy.sort(users);
-//        SearchService<User> searchService = new SearchService<>();
+//        SearchService<Clases.User> searchService = new SearchService<>();
 //        searchService.printSearchResult(users, getSearchKey());
     }
 

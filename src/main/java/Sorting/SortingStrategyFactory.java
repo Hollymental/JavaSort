@@ -1,3 +1,5 @@
+package Sorting;
+
 public class SortingStrategyFactory {
     public static <T extends Comparable<T>> SortingStrategy<T> createQuickSortStrategy() {
         return new QuickSortStrategy<>();

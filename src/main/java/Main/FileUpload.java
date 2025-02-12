@@ -1,10 +1,15 @@
+package Main;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.Iterator;
 
-import org.apache.poi.ss.formula.functions.T;
+import Clases.Bus;
+import Clases.Student;
+import Clases.User;
+import Validation.DataValidation;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -20,8 +25,6 @@ public class FileUpload {
     public User[] usersUpload(User[] users) {
         if (users.length < 0 || users.length > 7)
             return null;
-
-//        User[] users = new User[size];
         DataValidation dataValidation = new DataValidation(User.class);
         try {
             FileInputStream file = new FileInputStream(new File(this.filePath));
@@ -70,7 +73,8 @@ public class FileUpload {
                 Row row = rowIterator.next();
                 Iterator<Cell> cellIterator = row.cellIterator();
                 String[] busText = getRowInfo(cellIterator);
-                boolean isValid = dataValidation.validation(busText);
+                boolean isValid = dataValidation.validation((new String[]{String.valueOf((int) Double.parseDouble(busText[0])),
+                        busText[1], String.valueOf((int) Double.parseDouble(busText[2]))}));
                 if (isValid) {
                     Bus bus = new Bus.BusBuilder()
                             .setNumber(busText[0])
@@ -80,6 +84,7 @@ public class FileUpload {
                     buses[rowCount] = bus;
                 } else {
                     System.out.println("Данные из файла не валидны");
+                    System.out.println(busText[0] + " " + busText[1] + " "+ busText[2] + " ");
                 }
 
                 rowCount++;
@@ -97,7 +102,6 @@ public class FileUpload {
         if (students.length < 0 || students.length > 7)
             return null;
         DataValidation dataValidation = new DataValidation(Student.class);
-//        Student[] students = new Student[size];
         try {
             FileInputStream file = new FileInputStream(new File(this.filePath));
             XSSFWorkbook workbook = new XSSFWorkbook(file);
@@ -109,8 +113,8 @@ public class FileUpload {
                 Row row = rowIterator.next();
                 Iterator<Cell> cellIterator = row.cellIterator();
                 String[] studentText = getRowInfo(cellIterator);
-
-                boolean isValid = dataValidation.validation(studentText);
+                boolean isValid = dataValidation.validation((new String[]{studentText[0],
+                        studentText[1], String.valueOf((int) Double.parseDouble(studentText[2]))}));
                 if (isValid) {
                     Student student = new Student.StudentBuilder()
                             .setGroupNumber(studentText[0])

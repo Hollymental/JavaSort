@@ -1,3 +1,5 @@
+package Sorting;
+
 public class SortingService<T extends Comparable<T>> {
 
     private SortingStrategy<T> strategy;
