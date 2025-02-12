@@ -117,9 +117,9 @@ public class ForStudent {
     private static void fillArrayManually(Student[] students) {
         for (int i = 0; i < students.length; i++) {
             students[i] = ModelFactory.createStudent(
-                    InputScanner.getStringInput("Номер группы: "),
+                    InputScanner.getStudentGroupInput("Номер группы: "),
                     InputScanner.getDoubleInput("Средний бал: "),
-                    InputScanner.getIntInput("Номер зачетной книжки: "));
+                    InputScanner.getStudentBookNumberInput("Номер зачетной книжки: "));
         }
         printArray(students);
     }

@@ -30,7 +30,7 @@ public class DataValidation {
         }
         return 0 <= mileage && mileage <= 999999
                 && model.matches("^Model-[0-9]$")
-                && number.matches("^[0-9][0-9][0-9]$");
+                && number.matches("^[0-9]{3}$");
     }
 
     public boolean studentValidation(String[] text) {
