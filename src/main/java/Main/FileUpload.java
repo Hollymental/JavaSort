@@ -25,8 +25,6 @@ public class FileUpload {
     public User[] usersUpload(User[] users) {
         if (users.length < 0 || users.length > 7)
             return null;
-
-//        Clases.User[] users = new Clases.User[size];
         DataValidation dataValidation = new DataValidation(User.class);
         try {
             FileInputStream file = new FileInputStream(new File(this.filePath));
@@ -75,7 +73,8 @@ public class FileUpload {
                 Row row = rowIterator.next();
                 Iterator<Cell> cellIterator = row.cellIterator();
                 String[] busText = getRowInfo(cellIterator);
-                boolean isValid = dataValidation.validation(busText);
+                boolean isValid = dataValidation.validation((new String[]{String.valueOf((int) Double.parseDouble(busText[0])),
+                        busText[1], String.valueOf((int) Double.parseDouble(busText[2]))}));
                 if (isValid) {
                     Bus bus = new Bus.BusBuilder()
                             .setNumber(busText[0])
@@ -103,7 +102,6 @@ public class FileUpload {
         if (students.length < 0 || students.length > 7)
             return null;
         DataValidation dataValidation = new DataValidation(Student.class);
-//        Clases.Student[] students = new Clases.Student[size];
         try {
             FileInputStream file = new FileInputStream(new File(this.filePath));
             XSSFWorkbook workbook = new XSSFWorkbook(file);
@@ -115,8 +113,8 @@ public class FileUpload {
                 Row row = rowIterator.next();
                 Iterator<Cell> cellIterator = row.cellIterator();
                 String[] studentText = getRowInfo(cellIterator);
-
-                boolean isValid = dataValidation.validation(studentText);
+                boolean isValid = dataValidation.validation((new String[]{studentText[0],
+                        studentText[1], String.valueOf((int) Double.parseDouble(studentText[2]))}));
                 if (isValid) {
                     Student student = new Student.StudentBuilder()
                             .setGroupNumber(studentText[0])
