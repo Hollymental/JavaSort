@@ -62,7 +62,7 @@ public class ForStudent {
                         new StudentComparators.SortByRecordBookNumber(),
                         new StudentComparators.SortByGroupNumber(),
                         new StudentComparators.SortByAverageScore()
-                                        ));
+                ));
         studentQuickSortWithStrategy.sort(students);
         SearchService<Student> searchService = new SearchService<Student>();
         searchService.printSearchResult(students, getSearchKey());
@@ -70,7 +70,7 @@ public class ForStudent {
 
     private static void chooseCustomSort(Student[] students) {
         while (true) {
-            System.out.println("Выберите по каким параметрам сортировать (можно несколько до 2 параметров):\n" +
+            System.out.println("Выберите по каким параметрам сортировать (можно выбрать до 3 параметров):\n" +
                     "1.  По номеру группы\n" +
                     "2.  По среднему балу\n" +
                     "3.  По номеру зачетной книжки\n" +
@@ -78,56 +78,105 @@ public class ForStudent {
                     "5.  Сохранить полученный массив в файл\n" +
                     "0.  Выход");
             int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
+            QuickSortWithStrategy<Student> qs = new QuickSortWithStrategy<>();
+
 
             switch (choice) {
                 case 0:
                     return;
                 case 1:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new StudentComparators.SortByGroupNumber())).sort(students);
+                    qs.setStrategy(new CompositeComparator<>(new StudentComparators.SortByGroupNumber()));
+                    qs.sort(students);
                     break;
                 case 2:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new StudentComparators.SortByAverageScore())).sort(students);
+                    qs.setStrategy(new CompositeComparator<>(new StudentComparators.SortByAverageScore()));
+                    qs.sort(students);
                     break;
                 case 3:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new StudentComparators.SortByRecordBookNumber())).sort(students);
+                    qs.setStrategy(new CompositeComparator<>(new StudentComparators.SortByRecordBookNumber()));
+                    qs.sort(students);
                     break;
                 case 4:
                     EvenStudentResult evenStudentResult = fillEvenStudentArray(students);
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new StudentComparators.SortByRecordBookNumber())).evenSort(students, evenStudentResult.evenStudents, evenStudentResult.evenIndices);
+                    qs.setStrategy(new CompositeComparator<>(new StudentComparators.SortByRecordBookNumber()));
+                    qs.evenSort(students, evenStudentResult.evenStudents, evenStudentResult.evenIndices);
                     break;
                 case 5:
                     FileDownload fileDownload = new FileDownload("sortedstudents.xlsx");
                     fileDownload.createStudentFile(students);
                     break;
                 case 12:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new StudentComparators.SortByGroupNumber(), new StudentComparators.SortByAverageScore())).sort(students);
+                    qs.setStrategy(new CompositeComparator<>(
+                            new StudentComparators.SortByGroupNumber(), new StudentComparators.SortByAverageScore()));
+                    qs.sort(students);
                     break;
                 case 13:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new StudentComparators.SortByGroupNumber(), new StudentComparators.SortByRecordBookNumber())).sort(students);
+                    qs.setStrategy(new CompositeComparator<>(
+                            new StudentComparators.SortByGroupNumber(), new StudentComparators.SortByRecordBookNumber()));
+                    qs.sort(students);
                     break;
                 case 21:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new StudentComparators.SortByAverageScore(), new StudentComparators.SortByGroupNumber())).sort(students);
+                    qs.setStrategy(new CompositeComparator<>(
+                            new StudentComparators.SortByAverageScore(), new StudentComparators.SortByGroupNumber()));
+                    qs.sort(students);
                     break;
                 case 23:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new StudentComparators.SortByAverageScore(), new StudentComparators.SortByRecordBookNumber())).sort(students);
+                    qs.setStrategy(new CompositeComparator<>(
+                            new StudentComparators.SortByAverageScore(), new StudentComparators.SortByRecordBookNumber()));
+                    qs.sort(students);
                     break;
                 case 31:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new StudentComparators.SortByRecordBookNumber(), new StudentComparators.SortByGroupNumber())).sort(students);
+                    qs.setStrategy(new CompositeComparator<>(
+                            new StudentComparators.SortByRecordBookNumber(), new StudentComparators.SortByGroupNumber()));
+                    qs.sort(students);
                     break;
                 case 32:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new StudentComparators.SortByRecordBookNumber(), new StudentComparators.SortByAverageScore())).sort(students);
+                    qs.setStrategy(new CompositeComparator<>(
+                            new StudentComparators.SortByRecordBookNumber(), new StudentComparators.SortByAverageScore()));
+                    qs.sort(students);
                     break;
-
+                case 123:
+                    qs.setStrategy(new CompositeComparator<>(
+                            new StudentComparators.SortByGroupNumber(),
+                            new StudentComparators.SortByAverageScore(),
+                            new StudentComparators.SortByRecordBookNumber()));
+                    qs.sort(students);
+                    break;
+                case 132:
+                    qs.setStrategy(new CompositeComparator<>(
+                            new StudentComparators.SortByGroupNumber(),
+                            new StudentComparators.SortByRecordBookNumber(),
+                            new StudentComparators.SortByAverageScore()));
+                    qs.sort(students);
+                    break;
+                case 213:
+                    qs.setStrategy(new CompositeComparator<>(
+                            new StudentComparators.SortByAverageScore(),
+                            new StudentComparators.SortByGroupNumber(),
+                            new StudentComparators.SortByRecordBookNumber()));
+                    qs.sort(students);
+                    break;
+                case 231:
+                    qs.setStrategy(new CompositeComparator<>(
+                            new StudentComparators.SortByAverageScore(),
+                            new StudentComparators.SortByRecordBookNumber(),
+                            new StudentComparators.SortByGroupNumber()));
+                    qs.sort(students);
+                    break;
+                case 312:
+                    qs.setStrategy(new CompositeComparator<>(
+                            new StudentComparators.SortByRecordBookNumber(),
+                            new StudentComparators.SortByGroupNumber(),
+                            new StudentComparators.SortByAverageScore()));
+                    qs.sort(students);
+                    break;
+                case 321:
+                    qs.setStrategy(new CompositeComparator<>(
+                            new StudentComparators.SortByRecordBookNumber(),
+                            new StudentComparators.SortByAverageScore(),
+                            new StudentComparators.SortByGroupNumber()));
+                    qs.sort(students);
+                    break;
                 default:
                     System.out.println("Неверный выбор");
                     break;
@@ -148,8 +197,9 @@ public class ForStudent {
             students[i] = ModelFactory.createStudent(
                     InputScanner.getStudentGroupInput("Номер группы: "),
                     InputScanner.getDoubleInput("Средний бал: "),
-                    InputScanner.getStudentBookNumberInput("Номер зачетной книжки: "));;
-            if (students[i]==null) {
+                    InputScanner.getStudentBookNumberInput("Номер зачетной книжки: "));
+            ;
+            if (students[i] == null) {
                 i--;
             }
         }
@@ -161,18 +211,18 @@ public class ForStudent {
         printArray(students);
     }
 
-    static EvenStudentResult fillEvenStudentArray(Student[] students){
+    static EvenStudentResult fillEvenStudentArray(Student[] students) {
         int evenCount = 0; //количество чётных элементов
         for (Student student : students) {
-            if (student.getRecordBookNumber() % 2 == 0){
+            if (student.getRecordBookNumber() % 2 == 0) {
                 evenCount++;
             }
         }
         Student[] evenStudents = new Student[evenCount]; //массив чётных автобусов
         int currentIndex = 0; //текущий чётный элемент
         int[] evenIndices = new int[evenCount]; //индексы чётных элементов в изначальном массиве
-        for (int i = 0; i < students.length; i++){
-            if (students[i].getRecordBookNumber() % 2 == 0){
+        for (int i = 0; i < students.length; i++) {
+            if (students[i].getRecordBookNumber() % 2 == 0) {
                 evenStudents[currentIndex] = students[i];
                 evenIndices[currentIndex] = i;
                 currentIndex++;
@@ -220,7 +270,7 @@ public class ForStudent {
         return InputScanner.getStringInput("Введите номер зачетной книжки для поиска: ");
     }
 
-    static class EvenStudentResult{
+    static class EvenStudentResult {
         Student[] evenStudents;
         int[] evenIndices;
 

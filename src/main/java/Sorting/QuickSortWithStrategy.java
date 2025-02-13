@@ -9,6 +9,9 @@ public class QuickSortWithStrategy<T extends Comparable<T>> {
 
     private ComparatorStrategy<T> strategy;
 
+    public QuickSortWithStrategy() {
+    }
+
     public QuickSortWithStrategy(ComparatorStrategy<T> strategy) {
         this.strategy = strategy;
     }
