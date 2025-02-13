@@ -57,5 +57,4 @@ public class Bus implements Comparable<Bus>{
             return new Bus(number, model, mileage);
         }
     }
-
 }
