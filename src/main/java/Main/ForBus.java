@@ -103,6 +103,7 @@ public class ForBus {
                 case 5:
                     FileDownload fileDownload = new FileDownload("sortedbuses.xlsx");
                     fileDownload.createBusFile(buses);
+                    break;
                 case 12:
                     new QuickSortWithStrategy<>(new CompositeComparator<>(
                             new BusComporators.SortByNumber(), new BusComporators.SortByModel())).sort(buses);

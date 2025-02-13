@@ -19,7 +19,7 @@ public class Bus implements Comparable<Bus>{
 
     @Override
     public String toString() {
-        return String.format("Bus [ number: %-10s model: %-10s mileage: %-7d ]", number, model, mileage);
+        return String.format("Bus [ number: %-6s model: %-10s mileage: %-7d ]", number, model, mileage);
     }
 
     public int compareTo(Bus other) {

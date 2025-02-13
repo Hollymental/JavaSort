@@ -19,7 +19,7 @@ public class User implements Comparable<User>{
 
     @Override
     public String toString() {
-        return String.format("User [ name: %-10s password: %-10s email: %-10s ]", name, password, email);
+        return String.format("User [ name: %-10s password: %-14s email: %-10s ]", name, password, email);
     }
 
     public int compareTo(User other){ //сравнение
