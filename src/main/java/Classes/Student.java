@@ -19,7 +19,7 @@ public class Student implements Comparable<Student>{
 
     @Override
     public String toString() {
-        return String.format("Student [ groupNumber: %-4s averageScore: %-5.2f recordBookNumber: %-5s ]"
+        return String.format("Student [ groupNumber: %-10s averageScore: %-7.2f recordBookNumber: %-5s ]"
                 , groupNumber, averageScore, recordBookNumber);
     }
 
