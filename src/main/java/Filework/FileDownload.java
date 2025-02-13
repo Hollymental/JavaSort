@@ -36,6 +36,7 @@ public class FileDownload {
 
         try (FileOutputStream fileOut = new FileOutputStream(this.filePath)) {
             workbook.write(fileOut);
+            System.out.printf("Массив пользователей сохранен в файл %s\n",filePath);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -65,6 +66,7 @@ public class FileDownload {
 
         try (FileOutputStream fileOut = new FileOutputStream(this.filePath)) {
             workbook.write(fileOut);
+            System.out.printf("Массив автобусов сохранен в файл %s\n",filePath);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -94,6 +96,7 @@ public class FileDownload {
 
         try (FileOutputStream fileOut = new FileOutputStream(this.filePath)) {
             workbook.write(fileOut);
+            System.out.printf("Массив студентов сохранен в файл %s\n",filePath);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } finally {

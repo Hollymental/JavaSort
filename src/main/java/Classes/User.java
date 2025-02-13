@@ -21,12 +21,13 @@ public class User implements Comparable<User>{
 
     @Override
     public String toString() {
+
         return String.format("User [ name: %-10s password: %-10s email: %-28s ]", name, password, email);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(name, password, email);
+
     }
 
     public int compareTo(User other){ //сравнение

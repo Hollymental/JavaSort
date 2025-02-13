@@ -102,6 +102,7 @@ public class ForStudent {
                 case 5:
                     FileDownload fileDownload = new FileDownload("sortedstudents.xlsx");
                     fileDownload.createStudentFile(students);
+                    break;
                 case 12:
                     new QuickSortWithStrategy<>(new CompositeComparator<>(
                             new StudentComparators.SortByGroupNumber(), new StudentComparators.SortByAverageScore())).sort(students);
