@@ -1,5 +1,8 @@
 package Sorting;
 
+import Classes.Bus;
+import Classes.Student;
+import Classes.User;
 import Comparators.ComparatorStrategy;
 
 public class QuickSortWithStrategy<T extends Comparable<T>> {
@@ -24,7 +27,11 @@ public class QuickSortWithStrategy<T extends Comparable<T>> {
         for (int i = 0; i < evenItems.length; i++){
             originalItems[evenIndices[i]] = evenItems[i];
         }
-        printArray(originalItems);
+        if (originalItems[0] instanceof User){
+            printArrayIsEvenWithHashCode(originalItems);
+        } else {
+            printArrayWithEven(originalItems);
+        }
     }
 
     private void quickSort(T[] items, int low, int high) {
@@ -58,6 +65,34 @@ public class QuickSortWithStrategy<T extends Comparable<T>> {
     public void printArray(T[] array) {
         for (T element : array) {
             System.out.println(element);
+        }
+    }
+
+    public void printArrayWithEven(T[] array) {
+        for (T element : array) {
+            if (element instanceof Bus){
+                System.out.println(element  + " " + isEven(((Bus) element).getMileage()));
+            } else if (element instanceof Student){
+                System.out.println(element  + " " + isEven(((Student) element).getRecordBookNumber()));
+            }
+        }
+    }
+
+    public void printArrayIsEvenWithHashCode(T[] array) {
+        for (T element : array) {
+            if (element.hashCode() >= 0){
+                System.out.println(String.format("%s hashcode:  %-11d %-3s", element, element.hashCode(), isEven(element.hashCode())));
+            } else {
+                System.out.println(String.format("%s hashcode: %-11d  %-3s", element, element.hashCode(), isEven(element.hashCode())));
+            }
+        }
+    }
+
+    public String isEven(int value){
+        if (value % 2 == 0){
+            return "even";
+        } else {
+            return "odd";
         }
     }
 }

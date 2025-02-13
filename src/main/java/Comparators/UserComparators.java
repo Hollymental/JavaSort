@@ -24,5 +24,11 @@ public class UserComparators {
             return u1.getPassword().compareTo(u2.getPassword());
         }
     }
-}
 
+    public static class SortByHashCode implements ComparatorStrategy<User> {
+        @Override
+        public int compare(User u1, User u2) {
+            return Integer.compare(u1.hashCode(), u2.hashCode());
+        }
+    }
+}
