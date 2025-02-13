@@ -23,8 +23,6 @@ public class FileUpload {
     }
 
     public User[] usersUpload(User[] users) {
-        if (users.length < 0 || users.length > 7)
-            return null;
         DataValidation dataValidation = new DataValidation(User.class);
         try {
             FileInputStream file = new FileInputStream(new File(this.filePath));
@@ -59,8 +57,6 @@ public class FileUpload {
     }
 
     public Bus[] busesUpload(Bus[] buses) {
-        if (buses.length < 0 || buses.length > 7)
-            return null;
         DataValidation dataValidation = new DataValidation(Bus.class);
         try {
             FileInputStream file = new FileInputStream(new File(this.filePath));
@@ -98,9 +94,6 @@ public class FileUpload {
     }
 
     public Student[] studentsUpload(Student[] students) {
-
-        if (students.length < 0 || students.length > 7)
-            return null;
         DataValidation dataValidation = new DataValidation(Student.class);
         try {
             FileInputStream file = new FileInputStream(new File(this.filePath));
