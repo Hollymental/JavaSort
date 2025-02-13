@@ -1,9 +1,10 @@
 package Main;
 
+import BinarySearch.SearchService;
 import Comparators.BusComporators;
 import Comparators.CompositeComparator;
-import Clases.Bus;
-import Clases.ModelFactory;
+import Classes.Bus;
+import Classes.ModelFactory;
 import Filework.FileDownload;
 import Filework.FileUpload;
 import Sorting.QuickSortWithStrategy;
@@ -64,8 +65,8 @@ public class ForBus {
                 ));
 
         busQuickSortWithStrategy.sort(buses);
-    //    SearchService<Clases.Bus> searchService = new SearchService<>();
-    //    searchService.printSearchResult(buses, getSearchKey());
+        SearchService<Bus> searchService = new SearchService<Bus>();
+        searchService.printSearchResult(buses, getSearchKey());
     }
 
     private static void chooseCustomSort(Bus[] buses) {
@@ -74,7 +75,7 @@ public class ForBus {
                     "1.  По номеру автобуса\n" +
                     "2.  По модели\n" +
                     "3.  По пробегу\n" +
-                    "4.  По пробегу (только чётные)\n" +
+                    "4.  По номеру зачетной книжки (только чётные)\n" +
                     "5.  Сохранить полученный массив в файл\n" +
                     "0.  Выход");
             int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
@@ -159,26 +160,6 @@ public class ForBus {
         printArray(buses);
     }
 
-    static EvenBusResult fillEvenBusArray(Bus[] buses){
-        int evenCount = 0; //количество чётных элементов
-        for (Bus bus : buses) {
-            if (bus.getMileage() % 2 == 0){
-                evenCount++;
-            }
-        }
-        Bus[] evenBuses = new Bus[evenCount]; //массив чётных автобусов
-        int currentIndex = 0; //текущий чётный элемент
-        int[] evenIndices = new int[evenCount]; //индексы чётных элементов в изначальном массиве
-        for (int i = 0; i < buses.length; i++){
-            if (buses[i].getMileage() % 2 == 0){
-                evenBuses[currentIndex] = buses[i];
-                evenIndices[currentIndex] = i;
-                currentIndex++;
-            }
-        }
-        return new EvenBusResult(evenBuses, evenIndices);
-    }
-
     public static void printArray(Bus[] buses) {
         System.out.println("Массив автобусов: ");
         for (Bus bus : buses) {
@@ -212,6 +193,25 @@ public class ForBus {
             }
             return buses;
         }
+    }
+    static EvenBusResult fillEvenBusArray(Bus[] buses){
+        int evenCount = 0; //количество чётных элементов
+        for (Bus bus : buses) {
+            if (bus.getMileage() % 2 == 0){
+                evenCount++;
+            }
+        }
+        Bus[] evenBuses = new Bus[evenCount]; //массив чётных автобусов
+        int currentIndex = 0; //текущий чётный элемент
+        int[] evenIndices = new int[evenCount]; //индексы чётных элементов в изначальном массиве
+        for (int i = 0; i < buses.length; i++){
+            if (buses[i].getMileage() % 2 == 0){
+                evenBuses[currentIndex] = buses[i];
+                evenIndices[currentIndex] = i;
+                currentIndex++;
+            }
+        }
+        return new EvenBusResult(evenBuses, evenIndices);
     }
 
     private static String getSearchKey() {

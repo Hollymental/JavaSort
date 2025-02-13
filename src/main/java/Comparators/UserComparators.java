@@ -1,6 +1,6 @@
 package Comparators;
 
-import Clases.User;
+import Classes.User;
 
 public class UserComparators {
 

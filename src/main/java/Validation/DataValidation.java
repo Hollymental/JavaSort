@@ -1,8 +1,8 @@
 package Validation;
 
-import Clases.Bus;
-import Clases.Student;
-import Clases.User;
+import Classes.Bus;
+import Classes.Student;
+import Classes.User;
 
 public class DataValidation {
     private Class<?> dataType;

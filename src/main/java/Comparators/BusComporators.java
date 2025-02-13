@@ -1,6 +1,6 @@
 package Comparators;
 
-import Clases.Bus;
+import Classes.Bus;
 
 public class BusComporators {
     public static class SortByNumber implements ComparatorStrategy<Bus> {
