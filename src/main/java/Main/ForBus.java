@@ -65,7 +65,7 @@ public class ForBus {
                 ));
 
         busQuickSortWithStrategy.sort(buses);
-       SearchService<Bus> searchService = new SearchService<Bus>();
+        SearchService<Bus> searchService = new SearchService<Bus>();
         searchService.printSearchResult(buses, getSearchKey());
     }
 
@@ -218,14 +218,13 @@ public class ForBus {
         return InputScanner.getStringInput("Введите номер автобуса для поиска: ");
     }
 
+    static class EvenBusResult{
+        Bus[] evenBuses;
+        int[] evenIndices;
 
-}
- class EvenBusResult{
-    Bus[] evenBuses;
-    int[] evenIndices;
-
-    EvenBusResult(Bus[] evenBuses, int[] evenIndices) {
-        this.evenBuses = evenBuses;
-        this.evenIndices = evenIndices;
+        EvenBusResult(Bus[] evenBuses, int[] evenIndices) {
+            this.evenBuses = evenBuses;
+            this.evenIndices = evenIndices;
+        }
     }
 }
