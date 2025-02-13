@@ -30,6 +30,7 @@ public class StartMenu {
                     break;
                 case 0:
                     System.out.println("Программа завершена.");
+                    System.exit(0);
                     return;
                 default:
                     System.out.println("Неверный выбор. Попробуйте снова.");

@@ -75,7 +75,8 @@ public class ForUser {
                     "1.  По имени\n" +
                     "2.  По паролю\n" +
                     "3.  По email\n" +
-                    "4.  Сохранить полученный массив в файл\n" +
+                    "4.  По хэш-коду (только чётные)\n" +
+                    "5.  Сохранить полученный массив в файл\n" +
                     "0.  Выход");
             int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
 
@@ -95,6 +96,11 @@ public class ForUser {
                             new UserComparators.SortByEmail())).sort(users);
                     break;
                 case 4:
+                    EvenUserResult evenUserResult = fillEvenUserArray(users);
+                    new QuickSortWithStrategy<>(new CompositeComparator<>(
+                            new UserComparators.SortByHashCode())).evenSort(users, evenUserResult.evenUsers, evenUserResult.evenIndices);
+                    break;
+                case 5:
                     FileDownload fileDownload = new FileDownload("sortedusers.xlsx");
                     fileDownload.createUserFile(users);
                     break;
@@ -157,6 +163,26 @@ public class ForUser {
 
     }
 
+    static EvenUserResult fillEvenUserArray(User[] users){
+        int evenCount = 0; //количество чётных элементов
+        for (User user : users) {
+            if (user.hashCode() % 2 == 0){
+                evenCount++;
+            }
+        }
+        User[] evenUsers = new User[evenCount]; //массив чётных пользователей
+        int currentIndex = 0; //текущий чётный элемент
+        int[] evenIndices = new int[evenCount]; //индексы чётных элементов в изначальном массиве
+        for (int i = 0; i < users.length; i++){
+            if (users[i].hashCode() % 2 == 0){
+                evenUsers[currentIndex] = users[i];
+                evenIndices[currentIndex] = i;
+                currentIndex++;
+            }
+        }
+        return new EvenUserResult(evenUsers, evenIndices);
+    }
+
     public static void printArray(User[] users) {
         System.out.println("Массив пользователей: ");
         for (User user : users) {
@@ -196,4 +222,13 @@ public class ForUser {
         return InputScanner.getStringInput("Введите имя пользователя для поиска: ");
     }
 
+    static class EvenUserResult{
+        User[] evenUsers;
+        int[] evenIndices;
+
+        EvenUserResult(User[] evenUsers, int[] evenIndices) {
+            this.evenUsers = evenUsers;
+            this.evenIndices = evenIndices;
+        }
+    }
 }
