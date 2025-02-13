@@ -71,7 +71,7 @@ public class ForBus {
 
     private static void chooseCustomSort(Bus[] buses) {
         while (true) {
-            System.out.println("Выберите по каким параметрам сортировать (можно несколько до 2 параметров):\n" +
+            System.out.println("Выберите по каким параметрам сортировать (можно выбрать до 3 параметров):\n" +
                     "1.  По номеру автобуса\n" +
                     "2.  По модели\n" +
                     "3.  По пробегу\n" +
@@ -79,54 +79,97 @@ public class ForBus {
                     "5.  Сохранить полученный массив в файл\n" +
                     "0.  Выход");
             int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
+            QuickSortWithStrategy<Bus> qs = new QuickSortWithStrategy<>();
 
             switch (choice) {
                 case 0:
                     return;
                 case 1:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new BusComporators.SortByNumber())).sort(buses);
+                    qs.setStrategy(new CompositeComparator<>(new BusComporators.SortByNumber()));
+                    qs.sort(buses);
                     break;
                 case 2:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new BusComporators.SortByModel())).sort(buses);
+                    qs.setStrategy(new CompositeComparator<>(new BusComporators.SortByModel()));
+                    qs.sort(buses);
                     break;
                 case 3:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new BusComporators.SortByMileage())).sort(buses);
+                    qs.setStrategy(new CompositeComparator<>(new BusComporators.SortByMileage()));
+                    qs.sort(buses);
                     break;
                 case 4:
                     EvenBusResult evenBusResult = fillEvenBusArray(buses);
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new BusComporators.SortByMileage())).evenSort(buses, evenBusResult.evenBuses, evenBusResult.evenIndices);
+                    qs.setStrategy(new CompositeComparator<>(new BusComporators.SortByMileage()));
+                    qs.evenSort(buses, evenBusResult.evenBuses, evenBusResult.evenIndices);
                     break;
                 case 5:
                     FileDownload fileDownload = new FileDownload("sortedbuses.xlsx");
                     fileDownload.createBusFile(buses);
                     break;
                 case 12:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new BusComporators.SortByNumber(), new BusComporators.SortByModel())).sort(buses);
+                    qs.setStrategy(new CompositeComparator<>(new BusComporators.SortByNumber(), new BusComporators.SortByModel()));
+                    qs.sort(buses);
                     break;
                 case 13:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new BusComporators.SortByNumber(), new BusComporators.SortByMileage())).sort(buses);
+                    qs.setStrategy(new CompositeComparator<>(new BusComporators.SortByNumber(), new BusComporators.SortByMileage()));
+                    qs.sort(buses);
                     break;
                 case 21:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new BusComporators.SortByModel(), new BusComporators.SortByNumber())).sort(buses);
+                    qs.setStrategy(new CompositeComparator<>(new BusComporators.SortByModel(), new BusComporators.SortByNumber()));
+                    qs.sort(buses);
                     break;
                 case 23:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new BusComporators.SortByModel(), new BusComporators.SortByMileage())).sort(buses);
+                    qs.setStrategy(new CompositeComparator<>(new BusComporators.SortByModel(), new BusComporators.SortByMileage()));
+                    qs.sort(buses);
                     break;
                 case 31:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new BusComporators.SortByMileage(), new BusComporators.SortByNumber())).sort(buses);
+                    qs.setStrategy(new CompositeComparator<>(new BusComporators.SortByMileage(), new BusComporators.SortByNumber()));
+                    qs.sort(buses);
                     break;
                 case 32:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new BusComporators.SortByMileage(), new BusComporators.SortByModel())).sort(buses);
+                    qs.setStrategy(new CompositeComparator<>(new BusComporators.SortByMileage(), new BusComporators.SortByModel()));
+                    qs.sort(buses);
+                    break;
+                case 123:
+                    qs.setStrategy(new CompositeComparator<>(
+                            new BusComporators.SortByNumber(),
+                            new BusComporators.SortByModel(),
+                            new BusComporators.SortByMileage()));
+                    qs.sort(buses);
+                    break;
+                case 132:
+                    qs.setStrategy(new CompositeComparator<>(
+                            new BusComporators.SortByNumber(),
+                            new BusComporators.SortByMileage(),
+                            new BusComporators.SortByModel()
+                    ));
+                    qs.sort(buses);
+                case 213:
+                    qs.setStrategy(new CompositeComparator<>(
+                            new BusComporators.SortByModel(),
+                            new BusComporators.SortByNumber(),
+                            new BusComporators.SortByMileage()));
+                    qs.sort(buses);
+                    break;
+                case 231:
+                    qs.setStrategy(new CompositeComparator<>(
+                            new BusComporators.SortByModel(),
+                            new BusComporators.SortByMileage(),
+                            new BusComporators.SortByNumber()));
+                    qs.sort(buses);
+                    break;
+                case 312:
+                    qs.setStrategy(new CompositeComparator<>(
+                            new BusComporators.SortByMileage(),
+                            new BusComporators.SortByNumber(),
+                            new BusComporators.SortByModel()));
+                    qs.sort(buses);
+                    break;
+                case 321:
+                    qs.setStrategy(new CompositeComparator<>(
+                            new BusComporators.SortByMileage(),
+                            new BusComporators.SortByModel(),
+                            new BusComporators.SortByNumber()));
+                    qs.sort(buses);
                     break;
 
                 default:
@@ -149,7 +192,7 @@ public class ForBus {
                     InputScanner.getBusNumberInput("Номер: "),
                     InputScanner.getBusModelInput("Модель: "),
                     InputScanner.getIntInput("Пробег: "));
-            if (buses[i]==null) {
+            if (buses[i] == null) {
                 i--;
             }
         }
@@ -195,18 +238,19 @@ public class ForBus {
             return buses;
         }
     }
-    static EvenBusResult fillEvenBusArray(Bus[] buses){
+
+    static EvenBusResult fillEvenBusArray(Bus[] buses) {
         int evenCount = 0; //количество чётных элементов
         for (Bus bus : buses) {
-            if (bus.getMileage() % 2 == 0){
+            if (bus.getMileage() % 2 == 0) {
                 evenCount++;
             }
         }
         Bus[] evenBuses = new Bus[evenCount]; //массив чётных автобусов
         int currentIndex = 0; //текущий чётный элемент
         int[] evenIndices = new int[evenCount]; //индексы чётных элементов в изначальном массиве
-        for (int i = 0; i < buses.length; i++){
-            if (buses[i].getMileage() % 2 == 0){
+        for (int i = 0; i < buses.length; i++) {
+            if (buses[i].getMileage() % 2 == 0) {
                 evenBuses[currentIndex] = buses[i];
                 evenIndices[currentIndex] = i;
                 currentIndex++;
@@ -219,7 +263,7 @@ public class ForBus {
         return InputScanner.getStringInput("Введите номер автобуса для поиска: ");
     }
 
-    static class EvenBusResult{
+    static class EvenBusResult {
         Bus[] evenBuses;
         int[] evenIndices;
 

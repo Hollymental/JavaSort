@@ -17,7 +17,7 @@ public class ForUser {
         processUsers(users);
     }
 
-    
+
     private static void processUsers(User[] users) {
         while (true) {
             System.out.println("""
@@ -73,7 +73,7 @@ public class ForUser {
     private static void chooseCustomSort(User[] users) {
         while (true) {
 
-            System.out.println("Выберите по каким параметрам сортировать (можно несколько до 2 параметров):\n" +
+            System.out.println("Выберите по каким параметрам сортировать (можно выбрать до 3 параметров):\n" +
                     "1.  По имени\n" +
                     "2.  По паролю\n" +
                     "3.  По email\n" +
@@ -82,56 +82,105 @@ public class ForUser {
                     "0.  Выход");
 
             int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
+            QuickSortWithStrategy<User> qs = new QuickSortWithStrategy<>();
 
             switch (choice) {
                 case 0:
                     return;
                 case 1:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new UserComparators.SortByName())).sort(users);
+                    qs.setStrategy(new CompositeComparator<>(new UserComparators.SortByName()));
+                    qs.sort(users);
                     break;
                 case 2:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new UserComparators.SortByPassword())).sort(users);
+                    qs.setStrategy(new CompositeComparator<>(new UserComparators.SortByPassword()));
+                    qs.sort(users);
                     break;
                 case 3:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new UserComparators.SortByEmail())).sort(users);
+                    qs.setStrategy(new CompositeComparator<>(new UserComparators.SortByEmail()));
+                    qs.sort(users);
                     break;
                 case 4:
                     EvenUserResult evenUserResult = fillEvenUserArray(users);
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new UserComparators.SortByHashCode())).evenSort(users, evenUserResult.evenUsers, evenUserResult.evenIndices);
+                    qs.setStrategy(new CompositeComparator<>(
+                            new UserComparators.SortByHashCode()));
+                    qs.evenSort(users, evenUserResult.evenUsers, evenUserResult.evenIndices);
                     break;
                 case 5:
                     FileDownload fileDownload = new FileDownload("sortedusers.xlsx");
                     fileDownload.createUserFile(users);
                     break;
                 case 12:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new UserComparators.SortByName(), new UserComparators.SortByPassword())).sort(users);
+                    qs.setStrategy(new CompositeComparator<>(
+                            new UserComparators.SortByName(), new UserComparators.SortByPassword()));
+                    qs.sort(users);
                     break;
                 case 13:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new UserComparators.SortByName(), new UserComparators.SortByEmail())).sort(users);
+                    qs.setStrategy(new CompositeComparator<>(
+                            new UserComparators.SortByName(), new UserComparators.SortByEmail()));
+                    qs.sort(users);
                     break;
                 case 21:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new UserComparators.SortByPassword(), new UserComparators.SortByName())).sort(users);
+                    qs.setStrategy(new CompositeComparator<>(
+                            new UserComparators.SortByPassword(), new UserComparators.SortByName()));
+                    qs.sort(users);
                     break;
                 case 23:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new UserComparators.SortByPassword(), new UserComparators.SortByEmail())).sort(users);
+                    qs.setStrategy(new CompositeComparator<>(
+                            new UserComparators.SortByPassword(), new UserComparators.SortByEmail()));
+                    qs.sort(users);
                     break;
                 case 31:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new UserComparators.SortByEmail(), new UserComparators.SortByName())).sort(users);
+                    qs.setStrategy(new CompositeComparator<>(
+                            new UserComparators.SortByEmail(), new UserComparators.SortByName()));
+                    qs.sort(users);
                     break;
                 case 32:
-                    new QuickSortWithStrategy<>(new CompositeComparator<>(
-                            new UserComparators.SortByEmail(), new UserComparators.SortByPassword())).sort(users);
+                    qs.setStrategy(new CompositeComparator<>(
+                            new UserComparators.SortByEmail(), new UserComparators.SortByPassword()));
+                    qs.sort(users);
                     break;
-
+                case 123:
+                    qs.setStrategy(new CompositeComparator<>(
+                            new UserComparators.SortByName(),
+                            new UserComparators.SortByPassword(),
+                            new UserComparators.SortByEmail()));
+                    qs.sort(users);
+                    break;
+                case 132:
+                    qs.setStrategy(new CompositeComparator<>(
+                            new UserComparators.SortByName(),
+                            new UserComparators.SortByEmail(),
+                            new UserComparators.SortByPassword()));
+                    qs.sort(users);
+                    break;
+                case 213:
+                    qs.setStrategy(new CompositeComparator<>(
+                            new UserComparators.SortByPassword(),
+                            new UserComparators.SortByName(),
+                            new UserComparators.SortByEmail()));
+                    qs.sort(users);
+                    break;
+                case 231:
+                    qs.setStrategy(new CompositeComparator<>(
+                            new UserComparators.SortByPassword(),
+                            new UserComparators.SortByEmail(),
+                            new UserComparators.SortByName()));
+                    qs.sort(users);
+                    break;
+                case 312:
+                    qs.setStrategy(new CompositeComparator<>(
+                            new UserComparators.SortByEmail(),
+                            new UserComparators.SortByName(),
+                            new UserComparators.SortByPassword()));
+                    qs.sort(users);
+                    break;
+                case 321:
+                    qs.setStrategy(new CompositeComparator<>(
+                            new UserComparators.SortByEmail(),
+                            new UserComparators.SortByPassword(),
+                            new UserComparators.SortByName()));
+                    qs.sort(users);
+                    break;
                 default:
                     System.out.println("Неверный выбор");
                     break;
@@ -153,7 +202,7 @@ public class ForUser {
                     InputScanner.getStringInput("Имя: "),
                     InputScanner.getStringInput("Пароль: "),
                     InputScanner.getUserEmail("Email: "));
-            if (users[i]==null) {
+            if (users[i] == null) {
                 i--;
             }
         }
@@ -166,18 +215,18 @@ public class ForUser {
 
     }
 
-    static EvenUserResult fillEvenUserArray(User[] users){
+    static EvenUserResult fillEvenUserArray(User[] users) {
         int evenCount = 0; //количество чётных элементов
         for (User user : users) {
-            if (user.hashCode() % 2 == 0){
+            if (user.hashCode() % 2 == 0) {
                 evenCount++;
             }
         }
         User[] evenUsers = new User[evenCount]; //массив чётных пользователей
         int currentIndex = 0; //текущий чётный элемент
         int[] evenIndices = new int[evenCount]; //индексы чётных элементов в изначальном массиве
-        for (int i = 0; i < users.length; i++){
-            if (users[i].hashCode() % 2 == 0){
+        for (int i = 0; i < users.length; i++) {
+            if (users[i].hashCode() % 2 == 0) {
                 evenUsers[currentIndex] = users[i];
                 evenIndices[currentIndex] = i;
                 currentIndex++;
@@ -225,7 +274,7 @@ public class ForUser {
         return InputScanner.getStringInput("Введите имя пользователя для поиска: ");
     }
 
-    static class EvenUserResult{
+    static class EvenUserResult {
         User[] evenUsers;
         int[] evenIndices;
 
