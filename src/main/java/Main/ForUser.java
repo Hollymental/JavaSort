@@ -20,12 +20,13 @@ public class ForUser {
     
     private static void processUsers(User[] users) {
         while (true) {
-            System.out.println("Ваш выбор:\n" +
-                    "1.  Быстрая сортировка\n" +
-                    "2.  Кастомная сортировка\n" +
-                    "3.  Бинарный поиск\n" +
-                    "4.  Сохранить полученный массив в файл\n" +
-                    "0.  Выход.");
+            System.out.println("""
+                    Ваш выбор:
+                    1.  Быстрая сортировка
+                    2.  Кастомная сортировка
+                    3.  Бинарный поиск
+                    4.  Сохранить полученный массив в файл
+                    0.  Выход.""");
             int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
             switch (choice) {
                 case 0:
@@ -71,12 +72,13 @@ public class ForUser {
 
     private static void chooseCustomSort(User[] users) {
         while (true) {
-            System.out.println("Выберите по каким параметрам сортировать (можно несколько до 2 параметров):\n" +
-                    "1.  По имени\n" +
-                    "2.  По паролю\n" +
-                    "3.  По email\n" +
-                    "4.  Сохранить полученный массив в файл\n" +
-                    "0.  Выход");
+            System.out.println("""
+                    Выберите по каким параметрам сортировать (можно несколько до 2 параметров):
+                    1.  По имени
+                    2.  По паролю
+                    3.  По email
+                    4.  Сохранить полученный массив в файл
+                    0.  Выход""");
             int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
 
             switch (choice) {

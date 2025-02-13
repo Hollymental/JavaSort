@@ -7,9 +7,9 @@ import java.util.Random;
 public class ModelFactory {
     private static final Random random = new Random();
 
-    private static String[] randomNames = new String[]{"James", "Mary", "John", "Patricia", "Robert", "Jennifer", "Michael", "Linda", "William", "Elizabeth", "David", "Barbara", "Richard", "Susan", "Joseph", "Jessica", "Charles", "Sarah", "Thomas", "Karen"};
-    private static String[] randomPasswords = new String[]{"qwerty123", "asdfgh456", "zxcvbn789", "poiuyt321", "hjklmn654", "rtyuio987", "mnbvcx432", "qazwsx567", "plmokn098", "asdfghjkl", "qwertyuiop", "zxcvbnm123", "hjklqwe456", "tyuiop789", "mnbvcxz321", "qwerty456", "asdf12345", "zxcvbnm678", "poiuytrewq", "lkjhgfdsa"};
-    private static String[] randomEmails = new String[]{"user123@example.com", "random456@mail.com", "testuser789@yahoo.com", "sample.email1@gmail.com", "demo_user234@outlook.com", "example567@domain.com", "user.name8@webmail.com", "unique_email9@provider.com", "email_test10@service.com", "randomuser11@site.com", "user12@example.org", "test.email13@mail.ru", "demo_user14@inbox.com", "sample.email15@post.com", "example16@webservice.com", "user17@domain.org", "random18@provider.net", "test19@service.co", "unique20@webmail.net", "email21@example.net"};
+    private static final String[] randomNames = new String[]{"James", "Mary", "John", "Patricia", "Robert", "Jennifer", "Michael", "Linda", "William", "Elizabeth", "David", "Barbara", "Richard", "Susan", "Joseph", "Jessica", "Charles", "Sarah", "Thomas", "Karen"};
+    private static final String[] randomPasswords = new String[]{"qwerty123", "asdfgh456", "zxcvbn789", "poiuyt321", "hjklmn654", "rtyuio987", "mnbvcx432", "qazwsx567", "plmokn098", "asdfghjkl", "qwertyuiop", "zxcvbnm123", "hjklqwe456", "tyuiop789", "mnbvcxz321", "qwerty456", "asdf12345", "zxcvbnm678", "poiuytrewq", "lkjhgfdsa"};
+    private static final String[] randomEmails = new String[]{"user123@example.com", "random456@mail.com", "testuser789@yahoo.com", "sample.email1@gmail.com", "demo_user234@outlook.com", "example567@domain.com", "user.name8@webmail.com", "unique_email9@provider.com", "email_test10@service.com", "randomuser11@site.com", "user12@example.org", "test.email13@mail.ru", "demo_user14@inbox.com", "sample.email15@post.com", "example16@webservice.com", "user17@domain.org", "random18@provider.net", "test19@service.co", "unique20@webmail.net", "email21@example.net"};
 
     public static Bus createRandomBus() {
         String number = String.valueOf(random.nextInt(100, 1000));
