@@ -1,5 +1,7 @@
 package Classes;
 
+import java.util.Objects;
+
 public class User implements Comparable<User>{
     private final String name; //имя
     private final String password; //пароль
@@ -19,7 +21,13 @@ public class User implements Comparable<User>{
 
     @Override
     public String toString() {
-        return String.format("User [ name: %-10s password: %-14s email: %-10s ]", name, password, email);
+
+        return String.format("User [ name: %-10s password: %-10s email: %-28s ]", name, password, email);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, password, email);
+
     }
 
     public int compareTo(User other){ //сравнение
