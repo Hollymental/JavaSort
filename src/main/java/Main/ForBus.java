@@ -74,7 +74,8 @@ public class ForBus {
                     "1.  По номеру автобуса\n" +
                     "2.  По модели\n" +
                     "3.  По пробегу\n" +
-                    "4.  Сохранить полученный массив в файл\n" +
+                    "4.  По номеру зачетной книжки (только чётные)\n" +
+                    "5.  Сохранить полученный массив в файл\n" +
                     "0.  Выход");
             int choice = InputScanner.getIntInput("Сделайте ваш выбор: ");
 
@@ -94,6 +95,11 @@ public class ForBus {
                             new BusComporators.SortByMileage())).sort(buses);
                     break;
                 case 4:
+                    EvenBusResult evenBusResult = fillEvenBusArray(buses);
+                    new QuickSortWithStrategy<>(new CompositeComparator<>(
+                            new BusComporators.SortByMileage())).evenSort(buses, evenBusResult.evenBuses, evenBusResult.evenIndices);
+                    break;
+                case 5:
                     FileDownload fileDownload = new FileDownload("sortedbuses.xlsx");
                     fileDownload.createBusFile(buses);
                 case 12:
@@ -187,9 +193,38 @@ public class ForBus {
             return buses;
         }
     }
+    static EvenBusResult fillEvenBusArray(Bus[] buses){
+        int evenCount = 0; //количество чётных элементов
+        for (Bus bus : buses) {
+            if (bus.getMileage() % 2 == 0){
+                evenCount++;
+            }
+        }
+        Bus[] evenBuses = new Bus[evenCount]; //массив чётных автобусов
+        int currentIndex = 0; //текущий чётный элемент
+        int[] evenIndices = new int[evenCount]; //индексы чётных элементов в изначальном массиве
+        for (int i = 0; i < buses.length; i++){
+            if (buses[i].getMileage() % 2 == 0){
+                evenBuses[currentIndex] = buses[i];
+                evenIndices[currentIndex] = i;
+                currentIndex++;
+            }
+        }
+        return new EvenBusResult(evenBuses, evenIndices);
+    }
 
     private static String getSearchKey() {
         return InputScanner.getStringInput("Введите номер автобуса для поиска: ");
     }
 
+
+}
+ class EvenBusResult{
+    Bus[] evenBuses;
+    int[] evenIndices;
+
+    EvenBusResult(Bus[] evenBuses, int[] evenIndices) {
+        this.evenBuses = evenBuses;
+        this.evenIndices = evenIndices;
+    }
 }
